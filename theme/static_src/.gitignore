@@ -11,7 +11,7 @@ db.sqlite3
 *.sqlite3
 *.pyd
 *.mo
-
+static_files/
 # ENV #
 .env
 *.env
