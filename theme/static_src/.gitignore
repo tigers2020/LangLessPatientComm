@@ -11,7 +11,9 @@ db.sqlite3
 *.sqlite3
 *.pyd
 *.mo
-static_files/
+/static_files/
+/theme/static/data/
+
 # ENV #
 .env
 *.env
