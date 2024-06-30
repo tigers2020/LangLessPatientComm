@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Scanner{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center h-screen p-4">
+    {% include 'components/molecules/app_bar_with_controls.html' %}
+    <div id="webcam-container" class="flex justify-center items-center bg-gray-300 mt-4 mb-4" style="max-width: 600px; width: 100%; height: 60vh;">
+        <!-- Webcam or image preview will be here -->
+    </div>
+    {% include 'components/molecules/camera_controls.html' %}
+</div>
+
+<script>
+    const webcamContainer = document.getElementById('webcam-container');
+    const fileInput = document.getElementById('file-input');
+    let image = null;
+
+    function captureImage() {
+        const video = document.querySelector('video');
+        if (video) {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            image = canvas.toDataURL('image/jpeg');
+            showImagePreview();
+        }
+    }
+
+    function showImagePreview() {
+        if (image) {
+            webcamContainer.innerHTML = `<img src="${image}" alt="Preview" style="max-width: 100%; max-height: 100%; object-fit: contain;" />`;
+        } else {
+            startWebcam();
+        }
+    }
+
+    function startWebcam() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.play();
+                video.style.maxHeight = '100%';
+                video.style.objectFit = 'cover';
+                webcamContainer.innerHTML = '';
+                webcamContainer.appendChild(video);
+            })
+            .catch(console.error);
+    }
+
+    function handleFileChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                image = reader.result;
+                showImagePreview();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function sendImage() {
+        if (!image) return;
+
+        const formData = new FormData();
+        formData.append('image', image);
+
+        fetch('/api/scanner/upload', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => console.log('Image uploaded successfully:', data))
+        .catch(console.error);
+    }
+
+    function resetImage() {
+        image = null;
+        showImagePreview();
+    }
+
+    document.getElementById('capture-button').addEventListener('click', captureImage);
+    document.getElementById('upload-button').addEventListener('click', () => fileInput.click());
+    document.getElementById('send-button').addEventListener('click', sendImage);
+    document.getElementById('reset-button').addEventListener('click', resetImage);
+    fileInput.addEventListener('change', handleFileChange);
+
+    startWebcam();
+</script>
+{% endblock %}

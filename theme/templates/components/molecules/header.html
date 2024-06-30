@@ -1,0 +1,34 @@
+<header class="bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-50 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <button id="back-button" class="p-2" onclick="history.back()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+        </div>
+        <h1 class="text-xl font-bold hidden md:block">
+            <a href="{% url 'home' %}">
+               LangLessPatientComm
+            </a>
+        </h1>
+        <nav class="flex items-center space-x-4">
+            <button id="mobile-menu-button" class="md:hidden">Menu</button>
+            <select class="bg-primary-500 dark:bg-primary-600 border-none text-primary-50 dark:text-primary-50 p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
+                <option value="en">English</option>
+                <option value="ko">Korean</option>
+                <option value="es">Spanish</option>
+                <!-- Add more languages as needed -->
+            </select>
+            <button class="bg-primary-50 dark:bg-primary-700 text-primary-100 dark:text-primary-50 p-2 rounded hover:bg-primary-100 dark:hover:bg-primary-600">Login</button>
+            <label for="dark-mode-switch" class="flex items-center cursor-pointer">
+                <div class="relative">
+                    <input id="dark-mode-switch" type="checkbox" class="sr-only">
+                    <div class="w-10 h-4 bg-primary-400 rounded-full shadow-inner"></div>
+                    <div class="dot absolute w-6 h-6 bg-primary-50 rounded-full shadow -left-1 -top-1 transition"></div>
+                </div>
+                <div class="ml-3 text-primary-700 dark:text-primary-300">Dark Mode</div>
+            </label>
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Doctor Detail{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}</h1>
+
+    <div class="bg-white shadow-md rounded-lg overflow-hidden p-6">
+        <div class="flex items-center mb-4">
+            <div class="w-24 h-24 bg-gray-300 rounded-full mr-4"></div>
+            <div>
+                <h2 class="text-xl font-bold">{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}</h2>
+                {% if doctor.primary_specialty %}
+                    <p class="text-gray-600">{{ doctor.primary_specialty }}</p>
+                {% endif %}
+                {% if doctor.credential %}
+                    <p class="text-gray-600">{{ doctor.credential }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if doctor.telephone_number or doctor.address_line_1 or doctor.address_line_2 or doctor.city or doctor.state or doctor.zip_code %}
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold">Contact Information</h3>
+            {% if doctor.telephone_number %}
+                <p class="text-gray-600">Phone: {{ doctor.telephone_number }}</p>
+            {% endif %}
+            {% if doctor.address_line_1 or doctor.address_line_2 or doctor.city or doctor.state or doctor.zip_code %}
+                <p class="text-gray-600">Address: {{ doctor.address_line_1 }} {{ doctor.address_line_2 }}, {{ doctor.city }}, {{ doctor.state }} {{ doctor.zip_code }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if doctor.med_school or doctor.grad_year %}
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold">Education</h3>
+            {% if doctor.med_school %}
+                <p class="text-gray-600">{{ doctor.med_school }}{% if doctor.grad_year %} (Graduated: {{ doctor.grad_year }}){% endif %}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if doctor.primary_specialty or doctor.secondary_specialty %}
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold">Specialties</h3>
+            {% if doctor.primary_specialty %}
+                <p class="text-gray-600">Primary Specialty: {{ doctor.primary_specialty }}</p>
+            {% endif %}
+            {% if doctor.secondary_specialty %}
+                <p class="text-gray-600">Secondary Specialty: {{ doctor.secondary_specialty }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if doctor.facility_name %}
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold">Facility</h3>
+            <p class="text-gray-600">{{ doctor.facility_name }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

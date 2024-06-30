@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Request Prescriptions Online{% endblock %}
+
+{% block content %}
+<div class="bg-primary-50">
+    <!-- Header Section -->
+    <div class="bg-blue-600 text-white py-8">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-4">Dosing and Administration</h1>
+            <p class="text-xl">TZIELD is administered over the course of a single 2-week period</p>
+        </div>
+    </div>
+
+    <!-- Recommended Dosing Schedule Section -->
+    <div class="container mx-auto py-8">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold mb-4">Recommended dosing schedule</h2>
+            {% include 'components/organisms/dosing_schedule.html' %}
+        </div>
+    </div>
+
+    <!-- Dosing and Administration Instructions Section -->
+    <div class="container mx-auto py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+            {% include 'components/organisms/admin_instructions.html' %}
+        </div>
+    </div>
+
+    <!-- Other Sections ... -->
+</div>
+{% endblock %}

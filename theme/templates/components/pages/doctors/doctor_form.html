@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Add / Edit Doctor{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">{% if form.instance.pk %}Edit{% else %}Add{% endif %} Doctor</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<a href="{% url 'doctor-list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

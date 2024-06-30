@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col items-center mt-5 bg-primary-50 text-gray-800">
+        <div class="container mx-auto justify-center">
+            <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
+                <a href="{% url 'doctor-list' %}" class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md text-center text-primary-900 ">
+                    <img src="{% static 'images/main/doctor.png' %}" class="w-24 h-24 mb-2">
+                    Doctor List
+                </a>
+                <a href="{% url 'emergency-contact' %}" class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md text-center text-primary-900 ">
+                    <img src="{% static 'images/main/ambulance.png' %}" class="w-24 h-24 mb-2" alt="Emergency Contact">
+                    Emergency Contact
+                </a>
+                <a href="{% url 'drug_list' %}" class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md text-center text-primary-900 ">
+                    <img src="{% static 'images/main/medical-record.png' %}" class="w-24 h-24 mb-2">Prescription
+                </a>
+                <a href="{% url 'scanner' %}" class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md text-center text-primary-900 ">
+                    <img src="{% static 'images/main/refill.png' %}" class="w-24 h-24 mb-2">
+                    Scanner
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

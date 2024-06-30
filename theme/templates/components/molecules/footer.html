@@ -1,0 +1,51 @@
+{% load static %}
+<footer class="bg-gray-100 dark:bg-gray-800 text-black dark:text-white py-4 mt-auto">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            <div class="flex flex-col items-center p-4">
+                <img src="{% static 'images/logos/RITLogo.PNG' %}" alt="RIT Logo" class="w-40 h-40"/>
+            </div>
+            <div class="flex flex-col shadow-lg bg-white dark:bg-gray-700 bg-opacity-20 rounded-lg p-4">
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white">About Us</h2>
+                <p>
+                    <a href="https://www.rit.edu/" target="_blank"
+                       class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Rochester Institute of
+                        Technology</a><br/>
+                    <a href="https://www.rit.edu/simonecenter/overview" target="_blank"
+                       class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Studio 930</a><br/>
+                    <a href="https://www.rochesterregional.org/" target="_blank"
+                       class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Rochester Regional Health</a><br/>
+                    <a href="{% url 'about_us' %}" class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">The
+                        Creators (Team 11)</a><br/>
+                    <a href="{% url 'mission' %}" class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Our
+                        Mission</a>
+                </p>
+            </div>
+            <div class="flex flex-col shadow-lg bg-white dark:bg-gray-700 bg-opacity-20 rounded-lg p-4">
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Refugee Clinic Services</h2>
+                <p class="text-blue-800 dark:text-blue-300">
+                    Enter something here about the clinic and their resources<br/>
+                    Maybe the clinic contact information and location?
+                </p>
+            </div>
+            <div class="flex flex-col shadow-lg bg-white dark:bg-gray-700 bg-opacity-20 rounded-lg p-4">
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Features</h2>
+                <p class="text-blue-800 dark:text-blue-300">
+                    <a href="{% url 'doctor-list' %}" class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Doctors</a><br/>
+                    <a href="{% url 'scanner' %}"
+                       class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Prescription Scanner</a><br/>
+                    <a href="{% url 'prescription' %}"
+                       class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Refill Information</a><br/>
+                    <a href="{% url 'emergency-contact' %}"
+                       class="text-blue-800 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">Emergency Information</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto flex justify-center py-5">
+        <div class="flex justify-center items-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <img src="{% static 'images/logos/StudioLogo.PNG' %}" alt="Studio 930 Logo" class="w-96"/>
+            <img src="{% static 'images/logos/RRHLogo.PNG' %}" alt="Rochester Regional Health Logo" class="w-96"/>
+        </div>
+    </div>
+</footer>

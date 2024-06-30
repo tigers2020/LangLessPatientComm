@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Doctor{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Delete Doctor</h1>
+<p>Are you sure you want to delete "{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'doctor-list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
