@@ -5,11 +5,11 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">Doctor List</h1>
+    <h1 class="text-3xl font-bold mb-6 text-primary-800 dark:text-primary-200">Doctor List</h1>
 
     <form method="get" class="flex items-center mb-6">
-        <input type="text" name="search" placeholder="Search doctors..." value="{{ search_query }}" class="form-input w-full mr-2" />
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <input type="text" name="search" placeholder="Search doctors..." value="{{ search_query }}" class="form-input w-full mr-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" />
+        <button type="submit" class="bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 text-white font-bold py-2 px-4 rounded">
             Search
         </button>
     </form>
@@ -18,34 +18,34 @@
         <form method="get" class="flex items-center">
             <input type="hidden" name="search" value="{{ search_query }}" />
             <input type="hidden" name="page" value="{{ page_obj.number }}" />
-            <label for="gender" class="mr-2">Gender:</label>
-            <select name="gender" id="gender" class="form-select mr-4" onchange="this.form.submit()">
+            <label for="gender" class="mr-2 text-gray-700 dark:text-gray-300">Gender:</label>
+            <select name="gender" id="gender" class="form-select mr-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
                 <option value="">All</option>
                 <option value="M" {% if gender_filter == 'M' %}selected{% endif %}>Male</option>
                 <option value="F" {% if gender_filter == 'F' %}selected{% endif %}>Female</option>
             </select>
 
-            <label for="specialty" class="mr-2">Specialty:</label>
-            <input type="text" name="specialty" id="specialty" value="{{ specialty_filter }}" class="form-input mr-4" placeholder="Specialty" />
+            <label for="specialty" class="mr-2 text-gray-700 dark:text-gray-300">Specialty:</label>
+            <input type="text" name="specialty" id="specialty" value="{{ specialty_filter }}" class="form-input mr-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" placeholder="Specialty" />
 
-            <label for="items_per_page" class="mr-2">Items per page:</label>
-            <select name="items_per_page" id="items_per_page" class="form-select" onchange="this.form.submit()">
+            <label for="items_per_page" class="mr-2 text-gray-700 dark:text-gray-300">Items per page:</label>
+            <select name="items_per_page" id="items_per_page" class="form-select bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
                 {% for option in items_per_page_options %}
                     <option value="{{ option }}" {% if items_per_page == option %}selected{% endif %}>{{ option }}</option>
                 {% endfor %}
             </select>
         </form>
-        <a href="{% url 'doctor-create' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add New Doctor</a>
+        <a href="{% url 'doctor-create' %}" class="bg-secondary-500 hover:bg-secondary-600 dark:bg-secondary-600 dark:hover:bg-secondary-700 text-white font-bold py-2 px-4 rounded">Add New Doctor</a>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal">
             <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th class="px-5 py-3 border-b-2 border-primary-200 dark:border-primary-700 bg-primary-100 dark:bg-primary-800 text-left text-xs font-semibold text-primary-600 dark:text-primary-200 uppercase tracking-wider">
                         Name
                     </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th class="px-5 py-3 border-b-2 border-primary-200 dark:border-primary-700 bg-primary-100 dark:bg-primary-800 text-left text-xs font-semibold text-primary-600 dark:text-primary-200 uppercase tracking-wider">
                         Specialty
                     </th>
                 </tr>
@@ -53,18 +53,18 @@
             <tbody>
                 {% for doctor in page_obj %}
                 <tr>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <a href="{% url 'doctor-detail' doctor.pk %}" class="text-blue-600 hover:text-blue-800">
+                    <td class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-gray-800 text-sm">
+                        <a href="{% url 'doctor-detail' doctor.pk %}" class="text-primary-600 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-100">
                             {{ doctor.provider_first_name }} {{ doctor.provider_last_name }}
                         </a>
                     </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <td class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-gray-800 text-sm text-gray-700 dark:text-gray-300">
                         {{ doctor.primary_specialty }}
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="2" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+                    <td colspan="2" class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-gray-800 text-sm text-center text-gray-700 dark:text-gray-300">
                         No doctors found.
                     </td>
                 </tr>
@@ -75,7 +75,7 @@
 
     {% if page_obj.has_other_pages %}
     <div class="flex justify-center mt-6">
-               {% include 'components/molecules/pagination.html' %}
+        {% include 'components/molecules/pagination.html' %}
     </div>
     {% endif %}
 </div>

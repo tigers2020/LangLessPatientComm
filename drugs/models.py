@@ -1,31 +1,21 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils.html import mark_safe
 from tinymce.models import HTMLField
 
 
-from django.db import models
-from django.utils.html import mark_safe
-
-# Symptom model to store symptoms treated by the drug, including an image
-class Symptom(models.Model):
+class Condition(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='symptoms/', blank=True, null=True)
+    image = models.ImageField(upload_to='conditions/', blank=True, null=True)
+    is_side_effect = models.BooleanField(default=True)  # False for symptom, True for side effect
 
     def __str__(self):
-        return self.name
+        return self.name.capitalize()
 
-    @property
-    def image_tag(self):
-        if self.image:
-            return mark_safe(f'<img src="{self.image.url}" width="50" height="50" />')
-        return "No Image"
-
-# SideEffect model to store possible side effects of the drug, including an image
-class SideEffect(models.Model):
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='side_effects/', blank=True, null=True)
-
-    def __str__(self):
-        return self.name
+    def save(self, *args, **kwargs):
+        self.name = self.name.capitalize()
+        super().save(*args, **kwargs)
 
     @property
     def image_tag(self):
@@ -35,13 +25,28 @@ class SideEffect(models.Model):
 
 
 class Route(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
+    description = HTMLField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Route'
+        verbose_name_plural = 'Routes'
 
     def __str__(self):
-        return self.name
+        return f"{self.name.capitalize()}: {self.description[:40] if self.description else ''}..."
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
 
-# Drug model to store drug information
+@receiver(pre_save, sender=Route)
+def capitalize_name_on_presave(sender, instance, **kwargs):
+    instance.name = instance.name.capitalize()
+
+    def __repr__(self):
+        return f"Route(name={self.name}, description={self.description})"
+
+
 class Drug(models.Model):
     # Basic Information
     brand_name = models.CharField(max_length=255)
@@ -52,11 +57,16 @@ class Drug(models.Model):
 
     # Drug Details
     description = models.TextField()
-    uses = models.ManyToManyField(Symptom, related_name='drugs')
+    uses = models.ManyToManyField(Condition, related_name='drugs_as_symptom')
     dosage = HTMLField()
     ingredients = HTMLField()
-    side_effects = models.ManyToManyField(SideEffect, related_name='drugs')
+    side_effects = models.ManyToManyField(Condition, related_name='drugs_as_side_effect',
+                                          limit_choices_to={'is_side_effect': True})
     full_product_details = models.FileField(upload_to='product_details/', null=True, blank=True)
 
     def __str__(self):
-        return self.brand_name
+        return self.brand_name.capitalize()
+
+    def save(self, *args, **kwargs):
+        self.brand_name = self.brand_name.capitalize()
+        super().save(*args, **kwargs)
