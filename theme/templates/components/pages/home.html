@@ -1,27 +1,27 @@
+{# theme/templates/pages/home.html #}
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Home{% endblock %}
+
+{% block title %}Home - Healthcare Portal{% endblock %}
 
 {% block content %}
-    <div class="flex flex-col items-center mt-5 bg-primary-50 dark:bg-primary-800 text-gray-800 dark:text-gray-200">
-        <div class="container mx-auto justify-center">
-            <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
-                <a href="{% url 'doctor-list' %}" class="flex flex-col items-center p-4 bg-white dark:bg-primary-700 rounded-lg shadow-md text-center text-primary-900 dark:text-primary-100 hover:bg-primary-100 dark:hover:bg-primary-600 transition duration-300">
-                    <img src="{% static 'images/main/doctor.png' %}" class="w-24 h-24 mb-2 dark:invert">
-                    Doctor List
-                </a>
-                <a href="{% url 'emergency-contact' %}" class="flex flex-col items-center p-4 bg-white dark:bg-primary-700 rounded-lg shadow-md text-center text-primary-900 dark:text-primary-100 hover:bg-primary-100 dark:hover:bg-primary-600 transition duration-300">
-                    <img src="{% static 'images/main/ambulance.png' %}" class="w-24 h-24 mb-2 dark:invert" alt="Emergency Contact">
-                    Emergency Contact
-                </a>
-                <a href="{% url 'drug_list' %}" class="flex flex-col items-center p-4 bg-white dark:bg-primary-700 rounded-lg shadow-md text-center text-primary-900 dark:text-primary-100 hover:bg-primary-100 dark:hover:bg-primary-600 transition duration-300">
-                    <img src="{% static 'images/main/medical-record.png' %}" class="w-24 h-24 mb-2 dark:invert">Prescription
-                </a>
-                <a href="{% url 'scanner' %}" class="flex flex-col items-center p-4 bg-white dark:bg-primary-700 rounded-lg shadow-md text-center text-primary-900 dark:text-primary-100 hover:bg-primary-100 dark:hover:bg-primary-600 transition duration-300">
-                    <img src="{% static 'images/main/refill.png' %}" class="w-24 h-24 mb-2 dark:invert">
-                    Scanner
-                </a>
+    {# Main container #}
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row items-start justify-center gap-8">
+            {# Education section #}
+            {% include "components/molecules/education_card.html" %}
+
+            {# Services grid #}
+            <div class="w-full md:w-2/3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% include "components/atoms/service_card.html" with url="doctor-list" image="doctor.png" title="Doctor List" %}
+                    {% include "components/atoms/service_card.html" with url="emergency-contact" image="ambulance.png" title="Emergency Contact" %}
+                    {% include "components/atoms/service_card.html" with url="drug_list" image="medical-record.png" title="Drug Finder" %}
+                    {% include "components/atoms/service_card.html" with url="scanner" image="refill.png" title="Scanner" %}
+                    {% include "components/atoms/service_card.html" with url="#" image="extra.png" title="Extra Service 1" %}
+                    {% include "components/atoms/service_card.html" with url="#" image="extra.png" title="Extra Service 2" %}
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 {% endblock %}
