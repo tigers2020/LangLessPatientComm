@@ -45,36 +45,91 @@ module.exports = {
 
     theme: {
         extend: {
+            maxWidth: {
+                'custom': '1274.9px',
+            },
             colors: {
                 primary: {
-                    50: '#F0F7FD',
-                    100: '#DCEEF9',
-                    200: '#B9DEF3', // Hospital blue color
-                    300: '#8ACEEA',
-                    400: '#59BEE1',
-                    500: '#2AAED7',
-                    600: '#1D88AC',
-                    700: '#146580',
-                    800: '#0D4758',
-                    900: '#072B34',
+                    50: '#e6eae9',
+                    100: '#ccd5d3',
+                    200: '#99aba7',
+                    300: '#66817b',
+                    400: '#33574f',
+                    500: '#1A3129', // Main primary color
+                    600: '#152722',
+                    700: '#101d1a',
+                    800: '#0a1311',
+                    900: '#050a09',
                 },
                 secondary: {
-                    50: '#FDF6F2',
-                    100: '#FBEFE5',
-                    200: '#F6D2C4', // Complementary to primary, but not blue
-                    300: '#EEB59C',
-                    400: '#E48D6A',
-                    500: '#DA6641',
-                    600: '#C03F22',
-                    700: '#9A311A',
-                    800: '#752415',
-                    900: '#4E1710',
+                    50: '#f9fdf0',
+                    100: '#f3fbe1',
+                    200: '#e7f7c3',
+                    300: '#dbf3a5',
+                    400: '#CBEA7B', // Main secondary color
+                    500: '#b9d66f',
+                    600: '#93ab59',
+                    700: '#6e8043',
+                    800: '#4a562c',
+                    900: '#252b16',
                 },
-
+                tertiary: {
+                    50: '#fdfef9',
+                    100: '#FAFDF2', // Main tertiary color
+                    200: '#f5fbe6',
+                    300: '#f0f9d9',
+                    400: '#ebf7cc',
+                    500: '#d3deb7',
+                    600: '#a8b292',
+                    700: '#7e856e',
+                    800: '#545949',
+                    900: '#2a2c25',
+                },
+                accent: {
+                    50: '#fcfdf7',
+                    100: '#F6FBE9', // Main accent color
+                    200: '#edf7d3',
+                    300: '#e4f3bd',
+                    400: '#dbefa7',
+                    500: '#c5d696',
+                    600: '#9eab78',
+                    700: '#76805a',
+                    800: '#4f563c',
+                    900: '#272b1e',
+                },
+                highlight: {
+                    50: '#e7eae9',
+                    100: '#cfd5d3',
+                    200: '#9faba7',
+                    300: '#6f817b',
+                    400: '#3f574f',
+                    500: '#2b4a3f',
+                    600: '#234338', // Main highlight color
+                    700: '#1b332c',
+                    800: '#122220',
+                    900: '#091110',
+                },
+                warning: {
+                    50: '#fef7f1',
+                    100: '#fdefe3',
+                    200: '#fbdfc7',
+                    300: '#f9cfab',
+                    400: '#f1a159', // Main warning color
+                    500: '#d9914f',
+                    600: '#ad743f',
+                    700: '#82572f',
+                    800: '#563a20',
+                    900: '#2b1d10',
+                },
             },
         },
     },
-
+    variants: {
+        extend: {
+            backgroundColor: ['dark', 'dark:hover'],
+            textColor: ['dark'],
+        },
+    },
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling
@@ -84,5 +139,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
+        require('autoprefixer'),
     ],
 }

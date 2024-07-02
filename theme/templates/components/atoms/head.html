@@ -1,0 +1,102 @@
+<!-- theme/templates/components/atoms/head.html -->
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="{% block meta_description %}LangLessPatientComm - Improving healthcare communication{% endblock %}">
+    <title>LangLessPatientComm - {% block title %}{% endblock %}</title>
+
+    <!-- Preload critical assets -->
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" as="style">
+
+    <script type="text/javascript" src="/js/main.js"></script>
+    <!-- Inline critical dark mode script to prevent flickering -->
+    <script>
+        (function () {
+            const darkMode = localStorage.getItem('darkMode') === 'true' ||
+                (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.classList.toggle('dark', darkMode);
+        })();
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'es,fr,de,it,zh-CN,ja,ko,ru',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Load the main CSS file -->
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+
+    <!-- Custom CSS -->
+    <style>
+        /* custom.css */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px !important;
+            }
+        }
+
+        /* Custom CSS for Google Translate Element */
+        #google_translate_element {
+            @apply relative;
+            @apply flex;
+            @apply items-center;
+            @apply p-2;
+            @apply border;
+            @apply border-gray-300;
+            @apply rounded-md;
+            @apply bg-white;
+        }
+
+        #google_translate_element .goog-te-gadget {
+            @apply flex;
+            @apply items-center;
+            @apply space-x-2;
+        }
+
+        #google_translate_element .goog-te-gadget-icon {
+            @apply w-4;
+            @apply h-4;
+            @apply bg-no-repeat;
+            @apply bg-center;
+        }
+
+        #google_translate_element a {
+            @apply text-sm;
+            @apply text-gray-700;
+            @apply hover:text-gray-900;
+            @apply cursor-pointer;
+            @apply flex;
+            @apply items-center;
+            @apply space-x-1;
+        }
+
+        #google_translate_element a span {
+            @apply flex;
+            @apply items-center;
+        }
+
+        #google_translate_element a img {
+            @apply hidden;
+        }
+
+        #google_translate_element a span[aria-hidden="true"] {
+            @apply text-gray-500;
+        }
+    </style>
+    {% block custom_css %}{% endblock %}
+
+    <!-- Deferred loading of non-critical scripts -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin" defer></script>
+    <script src="{% static 'js/tinymce_setup.js' %}" defer></script>
+</head>

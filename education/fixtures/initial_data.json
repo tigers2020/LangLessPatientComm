@@ -1,0 +1,210 @@
+[
+  {
+    "model": "education.scenario",
+    "pk": 1,
+    "fields": {
+      "title": "Common Cold",
+      "image": "images/scenario/common_cold.jpg",
+      "description": "<p>You have a common cold. What should you do next?</p>",
+      "created_at": "2024-06-30T12:00:00Z",
+      "updated_at": "2024-06-30T12:00:00Z"
+    }
+  },
+  {
+    "model": "education.scenario",
+    "pk": 2,
+    "fields": {
+      "title": "Food Poisoning",
+      "image": "images/scenario/food_poisoning.jpg",
+      "description": "<p>You suspect you have food poisoning. What steps should you take?</p>",
+      "created_at": "2024-06-30T12:00:00Z",
+      "updated_at": "2024-06-30T12:00:00Z"
+    }
+  },
+  {
+    "model": "education.scenario",
+    "pk": 3,
+    "fields": {
+      "title": "Sprained Ankle",
+      "image": "images/scenario/sprained_ankle.jpg",
+      "description": "<p>You have sprained your ankle. What are the next steps?</p>",
+      "created_at": "2024-06-30T12:00:00Z",
+      "updated_at": "2024-06-30T12:00:00Z"
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 1,
+    "fields": {
+      "scenario": 1,
+      "content": "<p>You have a sore throat and runny nose. Do you:</p>",
+      "order": 1
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 2,
+    "fields": {
+      "scenario": 1,
+      "content": "<p>Drink plenty of fluids and rest.</p>",
+      "order": 2
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 3,
+    "fields": {
+      "scenario": 1,
+      "content": "<p>Take over-the-counter cold medicine.</p>",
+      "order": 3
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 4,
+    "fields": {
+      "scenario": 1,
+      "content": "<p>You feel better after resting. Do you:</p>",
+      "order": 4
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 1,
+    "fields": {
+      "page": 1,
+      "image": "images/choice/fluids.jpg",
+      "text": "Drink fluids and rest",
+      "next_page": 2
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 2,
+    "fields": {
+      "page": 1,
+      "image": "images/choice/medicine.jpg",
+      "text": "Take cold medicine",
+      "next_page": 3
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 3,
+    "fields": {
+      "page": 2,
+      "image": "images/choice/rest.jpg",
+      "text": "Continue resting",
+      "next_page": 4
+    }
+  },
+  {
+    "model": "education.outcome",
+    "pk": 1,
+    "fields": {
+      "page": 4,
+      "image": "images/outcome/feeling_better.jpg",
+      "description": "You feel better and recover from the cold.",
+      "next_scenario": null,
+      "is_end": true
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 5,
+    "fields": {
+      "scenario": 2,
+      "content": "<p>You have nausea and stomach pain. Do you:</p>",
+      "order": 1
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 4,
+    "fields": {
+      "page": 5,
+      "image": "images/choice/rest.jpg",
+      "text": "Rest and drink clear fluids",
+      "next_page": 6
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 6,
+    "fields": {
+      "scenario": 2,
+      "content": "<p>Resting helps, but you still feel weak. Do you:</p>",
+      "order": 2
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 5,
+    "fields": {
+      "page": 6,
+      "image": "images/choice/doctor.jpg",
+      "text": "Consult a doctor",
+      "next_page": null
+    }
+  },
+  {
+    "model": "education.outcome",
+    "pk": 2,
+    "fields": {
+      "page": 6,
+      "image": "images/outcome/doctor_visit.jpg",
+      "description": "You visit the doctor and get treated for food poisoning.",
+      "next_scenario": null,
+      "is_end": true
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 7,
+    "fields": {
+      "scenario": 3,
+      "content": "<p>You have sprained your ankle. Do you:</p>",
+      "order": 1
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 6,
+    "fields": {
+      "page": 7,
+      "image": "images/choice/ice.jpg",
+      "text": "Apply ice and elevate",
+      "next_page": 8
+    }
+  },
+  {
+    "model": "education.page",
+    "pk": 8,
+    "fields": {
+      "scenario": 3,
+      "content": "<p>You apply ice and elevate your ankle. Do you:</p>",
+      "order": 2
+    }
+  },
+  {
+    "model": "education.choice",
+    "pk": 7,
+    "fields": {
+      "page": 8,
+      "image": "images/choice/doctor.jpg",
+      "text": "Visit a doctor",
+      "next_page": null
+    }
+  },
+  {
+    "model": "education.outcome",
+    "pk": 3,
+    "fields": {
+      "page": 8,
+      "image": "images/outcome/recovery.jpg",
+      "description": "You visit the doctor and start rehabilitation.",
+      "next_scenario": null,
+      "is_end": true
+    }
+  }
+]

@@ -1,0 +1,10 @@
+<!-- src/templates/components/pages/education/scenario_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">{{ scenario.title }}</h1>
+<img src="{{ scenario.image.url }}" alt="{{ scenario.title }}" class="w-full h-auto mb-4">
+<div class="mb-4">{{ scenario.description|safe }}</div>
+<h2 class="text-xl font-semibold mb-2">Start the Scenario</h2>
+<a href="{% url 'page_detail' scenario.pages.first.pk %}" class="text-blue-600 hover:underline">Start Here</a>
+{% endblock %}

@@ -1,0 +1,7 @@
+<!-- theme/templates/components/molecules/nav_item.html -->
+<li>
+    <a href="{% url  a_href  %}" class="flex items-center px-4 py-2 text-sm font-medium {{ active_class }}">
+        {% include "components/atoms/icon_button.html" with extra_classes="mr-3" aria_label=title icon_path=icon_path %}
+        {{ title }}
+    </a>
+</li>

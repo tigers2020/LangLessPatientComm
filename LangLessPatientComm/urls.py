@@ -19,19 +19,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 from LangLessPatientComm import settings
-from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', include("home.urls")),
-
-    path('accounts/', include('allauth.urls')),
     path('doctors/', include('doctors.urls')),  # Doctors app
     path('drugs/', include('drugs.urls')),
-
-    path('tinymce/', include('tinymce.urls')),  # TinyMCE URLs
-
+    path('education/', include('education.urls')),
+    path('articles/', include('article.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

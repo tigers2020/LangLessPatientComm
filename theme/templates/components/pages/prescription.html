@@ -1,32 +1,68 @@
-{% extends "base.html" %}
+<!-- article/templates/components/pages/prescription_refill_guide.html -->
 
-{% block title %}Request Prescriptions Online{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Prescription Refill Guide{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
 
 {% block content %}
-<div class="bg-primary-50">
-    <!-- Header Section -->
-    <div class="bg-blue-600 text-white py-8">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">Dosing and Administration</h1>
-            <p class="text-xl">TZIELD is administered over the course of a single 2-week period</p>
-        </div>
+<div class="container mx-auto my-8 px-4">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Prescription Refill Guide</h1>
+        <p class="text-gray-600 dark:text-gray-400 mt-2">Important information and tips for refilling your prescriptions</p>
     </div>
 
-    <!-- Recommended Dosing Schedule Section -->
-    <div class="container mx-auto py-8">
-        <div class="text-center mb-8">
-            <h2 class="text-2xl font-bold mb-4">Recommended dosing schedule</h2>
-            {% include 'components/organisms/dosing_schedule.html' %}
-        </div>
+    <!-- Refill Process Articles -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {% for article in guide %}
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                {% if article.featured_image %}
+                    <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="w-full h-48 object-cover">
+                {% endif %}
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{{ article.title }}</h2>
+                    <div class="prose dark:prose-invert max-w-none">
+                        {{ article.content|safe }}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="col-span-3 text-center text-gray-500 dark:text-gray-400">No refill guidelines available at the moment.</p>
+        {% endfor %}
     </div>
 
-    <!-- Dosing and Administration Instructions Section -->
-    <div class="container mx-auto py-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-            {% include 'components/organisms/admin_instructions.html' %}
-        </div>
+    <!-- Refill Tips -->
+    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Refill Tips</h2>
+        <ul class="space-y-4">
+            {% for tip in tip %}
+                <li class="bg-white dark:bg-gray-800 rounded p-4 shadow flex items-start">
+                    <img src="{% static 'images/main/info.png' %}" alt="Info" class="w-6 h-6 mr-3 mt-1 flex-shrink-0">
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2 text-gray-800 dark:text-gray-200">{{ tip.title }}</h3>
+                        <div class="text-gray-600 dark:text-gray-400 prose dark:prose-invert max-w-none">
+                            {{ tip.content|safe }}
+                        </div>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="text-gray-500 dark:text-gray-400">No refill tips available at the moment.</li>
+            {% endfor %}
+        </ul>
     </div>
 
-    <!-- Other Sections ... -->
+    <!-- Pharmacy Contact Information -->
+    <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4 text-blue-800 dark:text-blue-200">Pharmacy Contacts</h2>
+        <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+            <li><strong>Main Pharmacy:</strong> [Insert Pharmacy Number]</li>
+            <li><strong>24/7 Pharmacy Helpline:</strong> [Insert Helpline Number]</li>
+            <li><strong>Online Refill Portal:</strong> <a href="#" class="underline">www.pharmacyrefill.com</a></li>
+            <!-- Add more pharmacy contacts as needed -->
+        </ul>
+    </div>
 </div>
 {% endblock %}

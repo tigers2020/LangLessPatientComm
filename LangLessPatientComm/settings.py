@@ -40,25 +40,19 @@ INSTALLED_APPS = [
     'home',
     'doctors',
     'drugs',
-    'products',
+    'article',
 
-    'django_filters',
+    'education',
 
-    'tinymce',
+    'ckeditor',
 
     'django_browser_reload',
 
     # Third-party apps...
     'django.contrib.sites',  # Required by allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
     # Add other providers as needed
 
 ]
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -79,7 +73,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",
+    #    "allauth.account.middleware.AccountMiddleware",
 
 ]
 
@@ -104,14 +98,14 @@ TEMPLATES = [
         },
     },
 ]
-AUTHENTICATION_BACKENDS = [
-
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     'django.contrib.auth.backends.ModelBackend',
+#
+#     # `allauth` specific authentication methods, such as login by email
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
 
 WSGI_APPLICATION = 'LangLessPatientComm.wsgi.application'
 

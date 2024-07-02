@@ -1,0 +1,14 @@
+<!-- src/templates/components/pages/education/choice_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">{{ choice.text }}</h1>
+<img src="{{ choice.image.url }}" alt="{{ choice.text }}" class="w-full h-auto mb-4">
+<div class="mb-4">{{ choice.page.content|safe }}</div>
+{% if choice.next_page %}
+    <a href="{% url 'page_detail' choice.next_page.pk %}" class="text-blue-600 hover:underline">Next Page</a>
+{% else %}
+    <p>No further pages available.</p>
+    <a href="{% url "scenario_list" %}">Back to Scenario</a>
+{% endif %}
+{% endblock %}

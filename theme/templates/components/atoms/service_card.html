@@ -1,7 +1,7 @@
 {# theme/templates/components/atoms/service_card.html #}
 {% load static %}
 <a href="{% if url == '#' %}#{% else %}{% url url %}{% endif %}"
-   class="flex flex-col items-center p-4 bg-white dark:bg-primary-700 rounded-lg shadow-md text-center text-primary-900 dark:text-primary-100 hover:bg-primary-100 dark:hover:bg-primary-600 transition duration-300">
+   class="w-48 h-48 mb-8 flex flex-col items-center p-4 bg-secondary-400 dark:bg-primary-700 rounded-lg shadow-md text-center text-primary-900 dark:text-primary-100 hover:bg-primary-100 dark:hover:bg-primary-600 transition duration-300">
     <img src="{% static 'images/main/'|add:image %}" class="w-24 h-24 mb-2 dark:invert" alt="{{ title }}">
     {{ title }}
 </a>

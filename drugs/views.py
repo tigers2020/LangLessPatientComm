@@ -32,19 +32,22 @@ class DrugListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['items_per_page'] = int(self.request.GET.get('items_per_page', self.paginate_by))
+
+        items_per_page = self.request.GET.get('items_per_page', str(self.paginate_by))
+        context['items_per_page'] = int(items_per_page) if items_per_page.isdigit() else self.paginate_by
         context['items_per_page_options'] = [10, 20, 50, 100, 200, 500]
 
-        # Add filter options to context
         context['routes'] = Route.objects.all()
         context['uses'] = Condition.objects.all()
         context['side_effects'] = Condition.objects.filter(is_side_effect=True)
 
-        # Safely convert to int, defaulting to 0 if empty or invalid
-        context['selected_route'] = int(self.request.GET.get('route')) if self.request.GET.get('route').isdigit() else 0
-        context['selected_use'] = int(self.request.GET.get('use')) if self.request.GET.get('use').isdigit() else 0
-        context['selected_side_effect'] = int(self.request.GET.get('side_effect')) if self.request.GET.get(
-            'side_effect').isdigit() else 0
+        def get_int_param(param_name):
+            param_value = self.request.GET.get(param_name)
+            return int(param_value) if param_value and param_value.isdigit() else 0
+
+        context['selected_route'] = get_int_param('route')
+        context['selected_use'] = get_int_param('use')
+        context['selected_side_effect'] = get_int_param('side_effect')
 
         context['search_query'] = self.request.GET.get('search', '')
 
