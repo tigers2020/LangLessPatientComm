@@ -1,3 +1,4 @@
+{% load tailwind_tags %}
 <!-- theme/templates/components/atoms/head.html -->
 {% load static %}
 <head>
@@ -8,9 +9,9 @@
     <title>LangLessPatientComm - {% block title %}{% endblock %}</title>
 
     <!-- Preload critical assets -->
-    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" as="style">
+    {% tailwind_preload_css %}
+    {% tailwind_css %}
 
-    <script type="text/javascript" src="/js/main.js"></script>
     <!-- Inline critical dark mode script to prevent flickering -->
     <script>
         (function () {
@@ -19,15 +20,20 @@
             document.documentElement.classList.toggle('dark', darkMode);
         })();
     </script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap" rel="stylesheet">
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                includedLanguages: 'es,fr,de,it,zh-CN,ja,ko,ru',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false,
+                multilanguagePage: true,
+                useSnapshot: true
             }, 'google_translate_element');
         }
     </script>
+
     <script type="text/javascript"
             src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
@@ -38,6 +44,7 @@
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/google-translate-custom.css' %}">
     <style>
         /* custom.css */
         @media (min-width: 1024px) {
@@ -51,7 +58,7 @@
             @apply relative;
             @apply flex;
             @apply items-center;
-            @apply p-2;
+            @apply p-10;
             @apply border;
             @apply border-gray-300;
             @apply rounded-md;

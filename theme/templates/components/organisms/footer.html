@@ -3,7 +3,8 @@
 <footer class="bg-primary-500 dark:bg-primary-700 text-primary-50 dark:text-primary-50 py-4 mt-auto">
         <div class="container mx-auto px-4 mb-5">
         <div class="flex flex-col sm:flex-row justify-between items-center">
-            <div class="ml-5">
+        <div class="flex items-center justify-center w-1/4 text-center">
+            <img src="{% static 'images/logos/logo-green.png' %}" alt="logo" class="w-8 h-8 mr-2"/>
                 LangLessPatientComm
             </div>
             <div class="text-right mr-10">
@@ -22,7 +23,7 @@
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div class="flex flex-col items-center p-4">
-                <img src="{% static 'images/logos/RITLogo.png' %}" alt="RIT Logo" class="w-40 h-40 bg-warning-400"/>
+                <img src="{% static 'images/logos/RITLogo.png' %}" alt="RIT Logo" class="rounded-full w-40 h-40 bg-warning-400"/>
             </div>
             <div class="flex flex-col shadow-lg bg-accent-100 dark:bg-accent-100 rounded-lg p-4">
                 <h2 class="text-lg font-bold text-primary-800 dark:text-primary-900">About Us</h2>
@@ -57,9 +58,12 @@
     </div>
     <div class="container mx-auto flex justify-end px-5 py-5">
         <div class="flex justify-center items-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <img src="{% static 'images/logos/StudioLogo.png' %}" alt="Studio 930 Logo" class="w-48 bg-warning-400"/>
-            <img src="{% static 'images/logos/RRHLogo.png' %}" alt="Rochester Regional Health Logo" class="w-48 bg-warning-400"/>
+            <img src="{% static 'images/logos/StudioLogo.png' %}" alt="Studio 930 Logo" class="w-48 bg-warning-800"/>
+            <img src="{% static 'images/logos/RRHLogo.png' %}" alt="Rochester Regional Health Logo" class="w-48 bg-warning-800"/>
         </div>
+    </div>
+        <div class="text-center py-4 text-primary-50 dark:text-primary-50">
+        © {% now "Y" %} Studio 930 and Rochester Regional Health. All rights reserved. Content is available under an open source license.
     </div>
 </footer>
 <script>

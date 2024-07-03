@@ -40,7 +40,7 @@
         {% block breadcrumbs %}
         {% endblock %}
         <!-- Main content area -->
-        <main id="main-content" class="flex-grow container mx-auto px-4 lg:max-w-screen-lg ">
+        <main id="main-content" class="flex-grow container mx-auto px-4 mt-16 lg:max-w-screen-lg ">
             {% block content %}{% endblock %}
         </main>
 
@@ -49,9 +49,11 @@
     </div>
 
     <!-- Main JavaScript file -->
-    <script src="{% static 'js/main.js' %}" async></script>
-    <script src="{% static 'js/menu.js' %}" async></script>
-
+    <!-- Include Alpine.js for Tailwind UI components -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js" integrity="sha512-8a9UdXfZb1Nnzzh5YhG50ZtbFbdNYD7J4o/7Fd/Da4uGJFTvAYrRZmxBk7IVOGUhcV+0GfBQcC+lk2k5Mt9icQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Include Flowbite for Tailwind components -->
+    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <!-- Custom JavaScript -->
     {% block custom_js %}{% endblock %}
 </body>
