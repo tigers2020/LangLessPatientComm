@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload or Capture Image{% endblock %}
+
+{% block content %}
+<div class="bg-tertiary-100 dark:bg-primary-700 py-12">
+  <div class="container mx-auto px-6 lg:px-8">
+    <h1 class="text-4xl font-bold text-center text-primary-600 dark:text-tertiary-100 mb-12">Upload or Capture an Image</h1>
+    <div class="mb-12 bg-accent-100 dark:bg-primary-600 p-6 rounded-lg shadow-md">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+          {{ form.image.label_tag }}
+          {{ form.image }}
+        </div>
+        <button type="submit" class="px-4 py-2 bg-primary-500 text-tertiary-100 rounded-lg shadow-md hover:bg-primary-600">Upload</button>
+      </form>
+      <h2 class="text-xl font-bold mt-8 mb-4">Or capture from webcam:</h2>
+      <div>
+        <video id="video" width="640" height="480" autoplay></video>
+        <button id="snap" class="px-4 py-2 bg-primary-500 text-tertiary-100 rounded-lg shadow-md hover:bg-primary-600">Snap Photo</button>
+        <canvas id="canvas" width="640" height="480" class="hidden"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    // Access the webcam stream
+    var video = document.getElementById('video');
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        });
+    }
+
+    // Capture an image
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    document.getElementById('snap').addEventListener('click', function() {
+        context.drawImage(video, 0, 0, 640, 480);
+        // Convert the canvas image to a Blob and send it to the server
+        canvas.toBlob(function(blob) {
+            var formData = new FormData();
+            formData.append('image', blob, 'capture.png');
+
+            fetch('{% url "upload_image" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '{% url "extract_text" %}';
+                } else {
+                    alert('Image upload failed');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

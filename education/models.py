@@ -1,11 +1,11 @@
 # src/education/models.py
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from django.db import models
 
 class Scenario(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/scenario/')
-    description = RichTextField()
+    description = CKEditor5Field()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -14,7 +14,7 @@ class Scenario(models.Model):
 
 class Page(models.Model):
     scenario = models.ForeignKey(Scenario, related_name='pages', on_delete=models.CASCADE)
-    content = RichTextField()
+    content = CKEditor5Field()
     order = models.IntegerField(default=0)
 
     def __str__(self):

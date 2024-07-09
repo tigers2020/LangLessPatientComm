@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Category(models.Model):
@@ -14,7 +14,7 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    description = RichTextField(blank=True)
+    description = CKEditor5Field(blank=True)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -58,7 +58,7 @@ class Article(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique_for_date='publish_date')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
-    content = RichTextField()
+    content = CKEditor5Field()
     publish_date = models.DateTimeField(default=timezone.now)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -70,7 +70,7 @@ class Article(models.Model):
 
     # Additional fields
     featured_image = models.ImageField(upload_to='article_images/', blank=True, null=True)
-    summary = models.TextField(max_length=500, blank=True)
+    summary = CKEditor5Field(max_length=500, blank=True)
     views_count = models.PositiveIntegerField(default=0)
 
     class Meta:

@@ -1,0 +1,11 @@
+{
+    "pharmacy": "RX OUTREACH",
+    "patient_name": "Public, Joseph Q.",
+    "Patient_address" : "1234 City Street St. Louis, MO 631295503",
+    "drug": "METFORMIN HCL TAB 1000MG",
+    "instructions": "1 TABLET BY MOUTH DAILY",
+    "doctor": "Dr. A. Physician",
+    "rx_number": "1099747",
+    "refill": "3",
+    "quantity": "90"
+}

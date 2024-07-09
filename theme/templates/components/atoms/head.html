@@ -9,7 +9,6 @@
     <title>LangLessPatientComm - {% block title %}{% endblock %}</title>
 
     <!-- Preload critical assets -->
-    {% tailwind_preload_css %}
     {% tailwind_css %}
 
     <!-- Inline critical dark mode script to prevent flickering -->
@@ -38,7 +37,6 @@
             src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- Load the main CSS file -->
-    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
@@ -102,8 +100,4 @@
         }
     </style>
     {% block custom_css %}{% endblock %}
-
-    <!-- Deferred loading of non-critical scripts -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin" defer></script>
-    <script src="{% static 'js/tinymce_setup.js' %}" defer></script>
 </head>

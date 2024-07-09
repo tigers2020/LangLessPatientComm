@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView, ListView
 
@@ -42,15 +43,42 @@ class Scanner(TemplateView):
     template_name = 'components/pages/Scanner.html'
     pass
 
+
 class PrescriptionRefillView(TemplateView):
+    """
+    View for handling prescription refill page.
+    """
     template_name = 'components/pages/prescription.html'
 
     def get_context_data(self, **kwargs):
+        """
+        Override get_context_data to provide context data for the template.
+
+        Returns:
+            dict: Context data for the template.
+        """
         context = super().get_context_data(**kwargs)
 
-        # Fetch articles in reverse order by id
-        context['guide'] = Article.objects.filter(category__slug='refill', tags__slug='guide').order_by('-id')
-        context['tip'] = Article.objects.filter(category__slug='refill', tags__slug='tip').order_by('-id')
+        # Import cache
+
+        # Check if the data is already cached
+        guide = cache.get('refill_guide')
+        tip = cache.get('refill_tip')
+
+        if not guide:
+            guide = list(
+                Article.objects.filter(category__slug='refill', tags__slug='guide').order_by('id').prefetch_related(
+                    'tags'))
+            cache.set('refill_guide', guide)
+
+        if not tip:
+            tip = list(
+                Article.objects.filter(category__slug='refill', tags__slug='tip').order_by('id').prefetch_related(
+                    'tags'))
+            cache.set('refill_tip', tip)
+
+        context['guide'] = guide
+        context['tip'] = tip
 
         return context
 

@@ -28,6 +28,8 @@ urlpatterns = [
     path('drugs/', include('drugs.urls')),
     path('education/', include('education.urls')),
     path('articles/', include('article.urls')),
+    path('ocr/', include('ocr_app.urls')),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

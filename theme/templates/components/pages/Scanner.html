@@ -3,53 +3,93 @@
 {% block title %}Scanner{% endblock %}
 
 {% block content %}
-<div class="flex flex-col items-center justify-center h-screen p-4">
-    {% include 'components/molecules/app_bar_with_controls.html' %}
-    <div id="webcam-container" class="flex justify-center items-center bg-gray-300 mt-4 mb-4" style="max-width: 600px; width: 100%; height: 60vh;">
-        <!-- Webcam or image preview will be here -->
-    </div>
-    {% include 'components/molecules/camera_controls.html' %}
-</div>
+<div class="flex flex-col min-h-screen">
+    <div class="flex-grow flex flex-col items-center justify-center p-4 w-full max-w-3xl mx-auto">
+        <!-- Atom: Header -->
+        <div class="w-full bg-blue-500 text-white p-2 flex justify-between items-center rounded-t-lg text-center">
+            <button id="reset-button" class="bg-white text-blue-500 p-2 rounded hover:bg-gray-100">Reset</button>
+            <h1 class="text-lg mx-auto font-bold">Scanner</h1>
+            <button id="capture-button" class="bg-white text-blue-500 p-2 rounded hover:bg-gray-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+            </button>
+        </div>
 
+        <!-- Molecule: Dropzone -->
+        <div id="dropzone-container" class="w-full">
+            <label for="dropzone-file"
+                   class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-b-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <span id="dropzone-content" class="flex flex-col items-center justify-center p-4 w-full">
+                    <!-- Content will be dynamically updated -->
+                </span>
+                <input id="dropzone-file" type="file" class="hidden" accept="image/*"/>
+            </label>
+        </div>
+
+        <!-- Atom: Send Button -->
+        <div class="w-full mt-4">
+            <button id="send-button" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700">Send
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
 <script>
-    const webcamContainer = document.getElementById('webcam-container');
-    const fileInput = document.getElementById('file-input');
+    // Get DOM elements
+    const dropzoneContainer = document.getElementById('dropzone-container');
+    const fileInput = document.getElementById('dropzone-file');
+    const dropzoneContent = document.getElementById('dropzone-content');
+    const captureButton = document.getElementById('capture-button');
     let image = null;
 
-    function captureImage() {
-        const video = document.querySelector('video');
-        if (video) {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0);
-            image = canvas.toDataURL('image/jpeg');
-            showImagePreview();
-        }
-    }
-
+    // Function to display the selected image
     function showImagePreview() {
         if (image) {
-            webcamContainer.innerHTML = `<img src="${image}" alt="Preview" style="max-width: 100%; max-height: 100%; object-fit: contain;" />`;
+            const img = new Image();
+            img.onload = function () {
+                const aspectRatio = this.naturalWidth / this.naturalHeight;
+                const maxWidth = dropzoneContainer.offsetWidth;
+                const maxHeight = 400;
+                let width = Math.min(this.naturalWidth, maxWidth);
+                let height = width / aspectRatio;
+                if (height > maxHeight) {
+                    height = maxHeight;
+                    width = height * aspectRatio;
+                }
+                dropzoneContent.innerHTML = `
+                    <img src="${image}" alt="Preview"
+                         style="width: ${width}px; height: ${height}px; object-fit: contain;" />
+                `;
+                dropzoneContainer.style.height = `${height + 40}px`;
+            };
+            img.src = image;
         } else {
-            startWebcam();
+            resetDropzone();
         }
     }
 
-    function startWebcam() {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                const video = document.createElement('video');
-                video.srcObject = stream;
-                video.play();
-                video.style.maxHeight = '100%';
-                video.style.objectFit = 'cover';
-                webcamContainer.innerHTML = '';
-                webcamContainer.appendChild(video);
-            })
-            .catch(console.error);
+    // Function to reset the dropzone to its initial state
+    function resetDropzone() {
+        dropzoneContent.innerHTML = `
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+        `;
+        dropzoneContainer.style.height = '160px';
     }
 
+    // Function to handle file selection
     function handleFileChange(event) {
         const file = event.target.files[0];
         if (file) {
@@ -62,35 +102,81 @@
         }
     }
 
+    // Function to send the image to the server
     function sendImage() {
-        if (!image) return;
+        if (!image) {
+            alert('Please select or capture an image first.');
+            return;
+        }
+
+        const byteCharacters = atob(image.split(',')[1]);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], {type: 'image/jpeg'});
 
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('image', blob, 'image.jpg');
 
-        fetch('/api/scanner/upload', {
+        fetch('{% url "upload_image" %}', {
             method: 'POST',
             body: formData,
             headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
+                'X-CSRFToken': '{{ csrf_token }}',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            redirect: 'follow'
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else {
+                return response.json();
             }
         })
-        .then(response => response.json())
-        .then(data => console.log('Image uploaded successfully:', data))
-        .catch(console.error);
+        .then(data => {
+            if (data && data.redirect) {
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while uploading the image. Please try again.');
+        });
     }
 
-    function resetImage() {
-        image = null;
-        showImagePreview();
+    // Function to handle camera capture
+    function handleCameraCapture() {
+        if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+            const cameraInput = document.createElement('input');
+            cameraInput.type = 'file';
+            cameraInput.accept = 'image/*';
+            cameraInput.capture = 'environment';
+            cameraInput.click();
+            cameraInput.addEventListener('change', handleFileChange);
+        } else {
+            alert('Your device does not support camera capture.');
+        }
     }
 
-    document.getElementById('capture-button').addEventListener('click', captureImage);
-    document.getElementById('upload-button').addEventListener('click', () => fileInput.click());
+    // Event listeners
     document.getElementById('send-button').addEventListener('click', sendImage);
-    document.getElementById('reset-button').addEventListener('click', resetImage);
+    document.getElementById('reset-button').addEventListener('click', resetDropzone);
     fileInput.addEventListener('change', handleFileChange);
+    captureButton.addEventListener('click', handleCameraCapture);
 
-    startWebcam();
+    // Initialize the dropzone
+    resetDropzone();
+
+    // Show capture button only on mobile devices
+    if ('ontouchstart' in window && 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+        captureButton.style.display = 'block';
+    } else {
+        captureButton.style.display = 'none';
+    }
 </script>
 {% endblock %}
