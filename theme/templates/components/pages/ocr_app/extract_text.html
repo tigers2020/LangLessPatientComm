@@ -4,21 +4,21 @@
 
 {% block content %}
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Extracted Text</h1>
-    <div class="bg-gray-100 p-4 rounded shadow-md">
-        <p>{{ text }}</p>
+    <h1 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Extracted Text</h1>
+    <div class="bg-info-400 dark:bg-neutral-700/50 p-4 rounded shadow-md">
+        <p class="text-neutral-600 dark:text-neutral-400">{{ text }}</p>
     </div>
 
-    <button data-popover-target="popover-tts" type="button" id="tts-button" class="mt-6 text-white bg-tertiary-600 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 relative">
-        Listen to Prescription Info
+    <button data-popover-target="popover-tts" type="button" id="tts-button" class="mt-6 text-white bg-secondary-600 hover:bg-secondary-700 focus:ring-4 focus:outline-none focus:ring-secondary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-secondary-500 dark:hover:bg-secondary-600 dark:focus:ring-secondary-400 relative">
+        Listen to Extracted Info
     </button>
 
-    <div data-popover id="popover-tts" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-            <h3 class="font-semibold text-gray-900 dark:text-white">Feature Advisor</h3>
+    <div data-popover id="popover-tts" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-neutral-500 transition-opacity duration-300 bg-white border border-neutral-200 rounded-lg shadow-sm opacity-0 dark:text-neutral-400 dark:border-neutral-600 dark:bg-neutral-800">
+        <div class="px-3 py-2 bg-primary-100 border-b border-neutral-200 rounded-t-lg dark:border-neutral-600 dark:bg-neutral-700">
+            <h3 class="font-semibold text-neutral-700 dark:text-neutral-300">Feature Advisor</h3>
         </div>
         <div class="px-3 py-2">
-            <p>it can be translated to different languages in the future.</p>
+            <p>It can be translated to different languages in the future.</p>
         </div>
         <div data-popper-arrow></div>
     </div>
@@ -27,55 +27,13 @@
         <audio id="audio-player" controls class="w-full">
             Your browser does not support the audio element.
         </audio>
-{#        <div class="flex items-center mt-2">#}
-{#            <button id="play-button" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700">Play</button>#}
-{#            <button id="pause-button" class="ml-2 bg-yellow-500 text-white p-2 rounded hover:bg-yellow-700">Pause</button>#}
-{#            <button id="stop-button" class="ml-2 bg-red-500 text-white p-2 rounded hover:bg-red-700">Stop</button>#}
-{#            <input type="range" id="progress-bar" class="ml-4 w-full" value="0" min="0" max="100" step="1">#}
-{#        </div>#}
     </div>
 
-    <h2 class="text-xl font-bold mt-6">Prescription Information</h2>
+    <h2 class="text-xl font-bold mt-6 text-neutral-700 dark:text-neutral-300">Extracted Entities</h2>
     <div class="mt-4">
-        <h3 class="text-lg font-bold">Pharmacy Info</h3>
-        <p><strong>Name:</strong> {{ prescription_info.pharmacy_info.name }}</p>
-        <p><strong>Address:</strong> {{ prescription_info.pharmacy_info.address }}</p>
-        <p><strong>Phone Number:</strong> {{ prescription_info.pharmacy_info.phone_number }}</p>
-    </div>
-
-    <div class="mt-4">
-        <h3 class="text-lg font-bold">Patient Info</h3>
-        <p><strong>Name:</strong> {{ prescription_info.patient_info.name }}</p>
-        <p><strong>Address:</strong> {{ prescription_info.patient_info.address }}</p>
-    </div>
-
-    <div class="mt-4">
-        <h3 class="text-lg font-bold">Prescription Info</h3>
-        <p><strong>Rx Number:</strong> {{ prescription_info.prescription_info.rx_number }}</p>
-        <p><strong>Refill Number:</strong> {{ prescription_info.prescription_info.refill_number }}</p>
-        <p><strong>Doctor Name:</strong> {{ prescription_info.prescription_info.doctor_name }}</p>
-        <p><strong>Date Prescription Written:</strong> {{ prescription_info.prescription_info.date_prescription_written }}</p>
-        <p><strong>Date Filled:</strong> {{ prescription_info.prescription_info.date_filled }}</p>
-        <p><strong>Pharmacist:</strong> {{ prescription_info.prescription_info.pharmacist }}</p>
-        <p><strong>Location:</strong> {{ prescription_info.prescription_info.location }}</p>
-        <p><strong>Discard After:</strong> {{ prescription_info.prescription_info.discard_after }}</p>
-        <p><strong>Qty Filled:</strong> {{ prescription_info.prescription_info.qty_filled }}</p>
-        <p><strong>Reorder After:</strong> {{ prescription_info.prescription_info.reorder_after }}</p>
-    </div>
-
-    <div class="mt-4">
-        <h3 class="text-lg font-bold">Drug Info</h3>
-        <p><strong>Name:</strong> {{ prescription_info.drug_info.name }}</p>
-        <p><strong>Instructions:</strong> {{ prescription_info.drug_info.instructions }}</p>
-        <p><strong>Pill Markings:</strong> {{ prescription_info.drug_info.pill_markings }}</p>
-        <p><strong>Manufacturer:</strong> {{ prescription_info.drug_info.manufacturer }}</p>
-        <p><strong>NDC/UPC:</strong> {{ prescription_info.drug_info.ndc_upc }}</p>
-    </div>
-
-    <div class="mt-4">
-        <h3 class="text-lg font-bold">Caution</h3>
-        <p><strong>Federal Law:</strong> {{ prescription_info.caution.federal_law }}</p>
-        <p><strong>Do Not Use After:</strong> {{ prescription_info.caution.do_not_use_after }}</p>
+        {% for entity in prescription_info.entities %}
+            <p class="text-neutral-600 dark:text-neutral-400"><strong>{{ entity.label }}:</strong> {{ entity.text }}</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
@@ -83,39 +41,7 @@
 {% block custom_js %}
 <script>
     document.getElementById('tts-button').addEventListener('click', function() {
-        const text = `
-            Pharmacy Info:
-            Name: {{ prescription_info.pharmacy_info.name }}
-            Address: {{ prescription_info.pharmacy_info.address }}
-            Phone Number: {{ prescription_info.pharmacy_info.phone_number }}
-
-            Patient Info:
-            Name: {{ prescription_info.patient_info.name }}
-            Address: {{ prescription_info.patient_info.address }}
-
-            Prescription Info:
-            Rx Number: {{ prescription_info.prescription_info.rx_number }}
-            Refill Number: {{ prescription_info.prescription_info.refill_number }}
-            Doctor Name: {{ prescription_info.prescription_info.doctor_name }}
-            Date Prescription Written: {{ prescription_info.prescription_info.date_prescription_written }}
-            Date Filled: {{ prescription_info.prescription_info.date_filled }}
-            Pharmacist: {{ prescription_info.prescription_info.pharmacist }}
-            Location: {{ prescription_info.prescription_info.location }}
-            Discard After: {{ prescription_info.prescription_info.discard_after }}
-            Qty Filled: {{ prescription_info.prescription_info.qty_filled }}
-            Reorder After: {{ prescription_info.prescription_info.reorder_after }}
-
-            Drug Info:
-            Name: {{ prescription_info.drug_info.name }}
-            Instructions: {{ prescription_info.drug_info.instructions }}
-            Pill Markings: {{ prescription_info.drug_info.pill_markings }}
-            Manufacturer: {{ prescription_info.drug_info.manufacturer }}
-            NDC/UPC: {{ prescription_info.drug_info.ndc_upc }}
-
-            Caution:
-            Federal Law: {{ prescription_info.caution.federal_law }}
-            Do Not Use After: {{ prescription_info.caution.do_not_use_after }}
-        `;
+        const text = Array.from(document.querySelectorAll('.mt-4 p')).map(p => p.innerText).join(', ');
 
         fetch("{% url 'text_to_speech' %}", {
             method: 'POST',
@@ -140,9 +66,6 @@
         })
         .catch(error => console.error('Error:', error));
     });
-
-    const audioPlayer = document.getElementById('audio-player');
-
 
     // Popover functionality
     const ttsButton = document.getElementById('tts-button');

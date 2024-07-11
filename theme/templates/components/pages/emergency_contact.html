@@ -11,52 +11,52 @@
 {% block content %}
 <div class="container mx-auto my-8 px-4">
     <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Emergency Guidelines</h1>
-        <p class="text-gray-600 dark:text-gray-400 mt-2">Important information and tips for emergency situations</p>
+        <h1 class="text-3xl font-bold text-neutral-700 dark:text-neutral-300">Emergency Guidelines</h1>
+        <p class="text-neutral-600 dark:text-neutral-400 mt-2">Important information and tips for emergency situations</p>
     </div>
 
     <!-- Emergency Articles -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {% for article in guide %}
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+            <div class="bg-primary-100 dark:bg-neutral-700 rounded-lg shadow-md overflow-hidden">
                 {% if article.featured_image %}
                     <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="w-full h-48 object-cover">
                 {% endif %}
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{{ article.title }}</h2>
-                    <div class="prose dark:prose-invert max-w-none">
+                    <h2 class="text-xl font-semibold mb-4 text-neutral-700 dark:text-neutral-300">{{ article.title }}</h2>
+                    <div class="prose dark:prose-invert max-w-none text-neutral-600 dark:text-neutral-400">
                         {{ article.content|safe }}
                     </div>
                 </div>
             </div>
         {% empty %}
-            <p class="col-span-3 text-center text-gray-500 dark:text-gray-400">No emergency guidelines available at the moment.</p>
+            <p class="col-span-3 text-center text-neutral-500 dark:text-neutral-400">No emergency guidelines available at the moment.</p>
         {% endfor %}
     </div>
 
     <!-- Emergency Tips -->
-    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 mb-8">
-        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">{{ tip.title}}</h2>
+    <div class="bg-primary-200 dark:bg-neutral-600 rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">{{ tip.title}}</h2>
         <ul class="space-y-4">
             {% for tip in tip %}
-                <li class="bg-white dark:bg-gray-800 rounded p-4 shadow flex items-start">
+                <li class="bg-primary-100 dark:bg-neutral-700 rounded p-4 shadow flex items-start">
                     <img src="{% static 'images/main/warning.png' %}" alt="Warning" class="w-6 h-6 mr-3 mt-1 flex-shrink-0">
                     <div>
-                        <div class="text-gray-600 dark:text-gray-400 prose dark:prose-invert max-w-none">
+                        <div class="text-neutral-600 dark:text-neutral-400 prose dark:prose-invert max-w-none">
                             {{ tip.content|safe }}
                         </div>
                     </div>
                 </li>
             {% empty %}
-                <li class="text-gray-500 dark:text-gray-400">No emergency tips available at the moment.</li>
+                <li class="text-neutral-500 dark:text-neutral-400">No emergency tips available at the moment.</li>
             {% endfor %}
         </ul>
     </div>
 
     <!-- Emergency Contact Information -->
-    <div class="bg-red-100 dark:bg-red-900 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-red-800 dark:text-red-200">Emergency Contacts</h2>
-        <ul class="space-y-2 text-red-700 dark:text-red-300">
+    <div class="bg-secondary-100 dark:bg-secondary-700 rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Emergency Contacts</h2>
+        <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
             <li><strong>Emergency Services:</strong> 911</li>
             <li><strong>Poison Control:</strong> 1-800-222-1222</li>
             <li><strong>Local Hospital:</strong> [Insert Local Hospital Number]</li>

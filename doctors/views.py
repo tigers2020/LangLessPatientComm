@@ -1,11 +1,10 @@
-# Create your views here.
+# views.py
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 
-from doctors.models import Doctor
+from doctors.models import Doctor, Specialty
 
 
 class DoctorListView(ListView):
@@ -18,7 +17,7 @@ class DoctorListView(ListView):
         return self.request.GET.get('items_per_page', self.paginate_by)
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().order_by('provider_last_name', 'provider_first_name')
         search_query = self.request.GET.get('search', '')
         gender_filter = self.request.GET.get('gender', '')
         specialty_filter = self.request.GET.get('specialty', '')
@@ -27,14 +26,14 @@ class DoctorListView(ListView):
             queryset = queryset.filter(
                 Q(provider_first_name__icontains=search_query) |
                 Q(provider_last_name__icontains=search_query) |
-                Q(primary_specialty__icontains=search_query)
+                Q(primary_specialty__name__icontains=search_query)
             )
 
         if gender_filter:
             queryset = queryset.filter(gender__iexact=gender_filter)
 
         if specialty_filter:
-            queryset = queryset.filter(primary_specialty__icontains=specialty_filter)
+            queryset = queryset.filter(primary_specialty__name__icontains=specialty_filter)
 
         return queryset
 
@@ -50,6 +49,15 @@ class DoctorListView(ListView):
         context['search_query'] = search_query
         context['gender_filter'] = gender_filter
         context['specialty_filter'] = specialty_filter
+
+        # Add specialties to context
+        context['specialties'] = Specialty.objects.all()
+
+        # Add breadcrumbs to context
+        context['breadcrumbs'] = [
+            {'name': 'Home', 'url': reverse_lazy('home')},
+            {'name': 'Doctors', 'url': reverse_lazy('doctor-list')}
+        ]
 
         queryset = self.get_queryset()
         paginator = Paginator(queryset, items_per_page)
@@ -71,6 +79,17 @@ class DoctorDetailView(DetailView):
     model = Doctor
     template_name = 'components/pages/doctors/doctor_detail.html'
     context_object_name = 'doctor'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        doctor = self.get_object()
+        context['breadcrumbs'] = [
+            {'name': 'Home', 'url': reverse_lazy('home')},
+            {'name': 'Doctors', 'url': reverse_lazy('doctor-list')},
+            {'name': f'{doctor.provider_first_name} {doctor.provider_last_name}', 'url': reverse_lazy('doctor-detail', args=[doctor.pk])}
+        ]
+        return context
+
 
 
 class DoctorCreateView(CreateView):

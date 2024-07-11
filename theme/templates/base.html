@@ -1,10 +1,12 @@
+// templates/base.html
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 {% include 'components/atoms/head.html' %}
-<body class="bg-tertiary-100 dark:bg-primary-900 dark:text-primary-50 min-h-screen">
+<body class="bg-primary-50 dark:bg-neutral-600 text-black dark:text-white min-h-screen">
     <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-primary-600 text-white p-2">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-secondary-500 dark:bg-secondary-700 text-white p-2 rounded">
         Skip to main content
     </a>
     <!-- Main content wrapper -->
@@ -15,7 +17,7 @@
         {% block breadcrumbs %}
         {% endblock %}
         <!-- Main content area -->
-        <main id="main-content" class="flex-grow container mx-auto px-4 mt-16 lg:max-w-screen-lg ">
+        <main id="main-content" class="flex-grow container mx-auto px-4 mt-16 lg:max-w-screen-lg bg-primary-100 dark:bg-neutral-700 rounded-lg shadow-md">
             {% block content %}{% endblock %}
         </main>
 
@@ -25,7 +27,7 @@
 
     <!-- Main JavaScript file -->
     <!-- Include Alpine.js for Tailwind UI components -->
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Include Flowbite for Tailwind components -->
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
     <script src="{% static 'js/main.js' %}"></script>

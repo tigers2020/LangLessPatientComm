@@ -29,6 +29,7 @@ urlpatterns = [
     path('education/', include('education.urls')),
     path('articles/', include('article.urls')),
     path('ocr/', include('ocr_app.urls')),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
 
 ]
 if settings.DEBUG:

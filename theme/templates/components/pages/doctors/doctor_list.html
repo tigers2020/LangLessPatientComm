@@ -3,42 +3,85 @@
 
 {% block title %}Doctor List{% endblock %}
 
+{% block breadcrumbs %}
+{% if breadcrumbs %}
+<nav class="flex border-b border-gray-200 bg-white" aria-label="Breadcrumb">
+  <ol role="list" class="mx-auto flex w-full max-w-screen-xl space-x-4 px-4 sm:px-6 lg:px-8">
+    {% for breadcrumb in breadcrumbs %}
+      <li class="flex">
+        <div class="flex items-center">
+          {% if forloop.first %}
+            <a href="{{ breadcrumb.url }}" class="text-gray-400 hover:text-gray-500">
+              <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd" />
+              </svg>
+              <span class="sr-only">{{ breadcrumb.name }}</span>
+            </a>
+          {% else %}
+            <svg class="h-full w-6 flex-shrink-0 text-gray-200" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" aria-hidden="true">
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+            {% if not forloop.last %}
+              <a href="{{ breadcrumb.url }}" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ breadcrumb.name }}</a>
+            {% else %}
+              <span class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" aria-current="page">{{ breadcrumb.name }}</span>
+            {% endif %}
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}
+
+{% endblock %}
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6 text-primary-800 dark:text-primary-200">Doctor List</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-600 dark:text-gray-400">Doctor List</h1>
 
     <form method="get" class="flex items-center mb-6">
-        <input type="text" name="search" placeholder="Search doctors..." value="{{ search_query }}" class="form-input w-full mr-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" />
-        <button type="submit" class="bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 text-white font-bold py-2 px-4 rounded">
+        <input type="text" name="search" placeholder="Search doctors..." value="{{ search_query }}" class="form-input w-full mr-2 bg-white dark:bg-neutral-700 text-gray-600 dark:text-gray-400 border-primary-300 dark:border-primary-600" />
+        <button type="submit" class="bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 text-secondary-500 font-bold py-2 px-4 rounded">
             Search
         </button>
     </form>
 
-    <div class="flex justify-between items-center mb-6">
-        <form method="get" class="flex items-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <form method="get" class="flex flex-col space-y-4">
             <input type="hidden" name="search" value="{{ search_query }}" />
             <input type="hidden" name="page" value="{{ page_obj.number }}" />
-            <label for="gender" class="mr-2 text-gray-700 dark:text-gray-300">Gender:</label>
-            <select name="gender" id="gender" class="form-select mr-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
-                <option value="">All</option>
-                <option value="M" {% if gender_filter == 'M' %}selected{% endif %}>Male</option>
-                <option value="F" {% if gender_filter == 'F' %}selected{% endif %}>Female</option>
-            </select>
 
-            <label for="specialty" class="mr-2 text-gray-700 dark:text-gray-300">Specialty:</label>
-            <input type="text" name="specialty" id="specialty" value="{{ specialty_filter }}" class="form-input mr-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" placeholder="Specialty" />
+            <div class="flex items-center">
+                <label for="gender" class="mr-2 text-gray-600 dark:text-gray-400">Gender:</label>
+                <select name="gender" id="gender" class="form-select w-full bg-white dark:bg-neutral-700 text-gray-600 dark:text-gray-400 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
+                    <option value="">All</option>
+                    <option value="M" {% if gender_filter == 'M' %}selected{% endif %}>Male</option>
+                    <option value="F" {% if gender_filter == 'F' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
 
-            <label for="items_per_page" class="mr-2 text-gray-700 dark:text-gray-300">Items per page:</label>
-            <select name="items_per_page" id="items_per_page" class="form-select bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
-                {% for option in items_per_page_options %}
-                    <option value="{{ option }}" {% if items_per_page == option %}selected{% endif %}>{{ option }}</option>
-                {% endfor %}
-            </select>
+            <div class="flex items-center">
+                <label for="specialty" class="mr-2 text-gray-600 dark:text-gray-400">Specialty:</label>
+                <select name="specialty" id="specialty" class="form-select w-full bg-white dark:bg-neutral-700 text-gray-600 dark:text-gray-400 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
+                    <option value="">All</option>
+                    {% for specialty in specialties %}
+                        <option value="{{ specialty.name }}" {% if specialty_filter == specialty.name %}selected{% endif %}>{{ specialty.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex items-center">
+                <label for="items_per_page" class="mr-2 text-gray-600 dark:text-gray-400">Items per page:</label>
+                <select name="items_per_page" id="items_per_page" class="form-select w-full bg-white dark:bg-neutral-700 text-gray-600 dark:text-gray-400 border-primary-300 dark:border-primary-600" onchange="this.form.submit()">
+                    {% for option in items_per_page_options %}
+                        <option value="{{ option }}" {% if items_per_page == option %}selected{% endif %}>{{ option }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </form>
-        <a href="{% url 'doctor-create' %}" class="bg-secondary-500 hover:bg-secondary-600 dark:bg-secondary-600 dark:hover:bg-secondary-700 text-white font-bold py-2 px-4 rounded">Add New Doctor</a>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+    <div class="bg-primary-500 dark:bg-neutral-700 shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal">
             <thead>
                 <tr>
@@ -53,18 +96,21 @@
             <tbody>
                 {% for doctor in page_obj %}
                 <tr>
-                    <td class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-gray-800 text-sm">
-                        <a href="{% url 'doctor-detail' doctor.pk %}" class="text-primary-600 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-100">
+                    <td class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-neutral-700 text-sm">
+                        <a href="{% url 'doctor-detail' doctor.pk %}" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
                             {{ doctor.provider_first_name }} {{ doctor.provider_last_name }}
                         </a>
                     </td>
-                    <td class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-gray-800 text-sm text-gray-700 dark:text-gray-300">
-                        {{ doctor.primary_specialty }}
+                    <td class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-neutral-700 text-sm text-gray-600 dark:text-gray-400">
+                        {% if doctor.primary_specialty.image %}
+                            <img src="{{ doctor.primary_specialty.image.url }}" alt="{{ doctor.primary_specialty.name }}" class="w-8 h-8 inline-block mr-2 dark:invert">
+                        {% endif %}
+                        {{ doctor.primary_specialty.name }}
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="2" class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-gray-800 text-sm text-center text-gray-700 dark:text-gray-300">
+                    <td colspan="2" class="px-5 py-5 border-b border-primary-200 dark:border-primary-700 bg-white dark:bg-neutral-700 text-sm text-center text-gray-600 dark:text-gray-400">
                         No doctors found.
                     </td>
                 </tr>

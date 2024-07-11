@@ -40,7 +40,7 @@ class EmergencyGuidelineView(TemplateView):
 
 
 class Scanner(TemplateView):
-    template_name = 'components/pages/Scanner.html'
+    template_name = 'components/pages/ocr_app/Scanner.html'
     pass
 
 

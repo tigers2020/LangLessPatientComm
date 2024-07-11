@@ -7,7 +7,7 @@
     <ol role="list" class="flex items-center space-x-4">
         <li>
             <div>
-                <a href="{% url 'home' %}" class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200">
+                <a href="{% url 'home' %}" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
                     <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd"/>
                     </svg>
@@ -17,10 +17,10 @@
         </li>
         <li>
             <div class="flex items-center">
-                <svg class="h-5 w-5 flex-shrink-0 text-primary-400 dark:text-primary-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <svg class="h-5 w-5 flex-shrink-0 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
-                <span class="ml-4 text-sm font-medium text-primary-500 dark:text-primary-400" aria-current="page">Drug List</span>
+                <span class="ml-4 text-sm font-medium text-gray-500 dark:text-gray-400" aria-current="page">Drug List</span>
             </div>
         </li>
     </ol>
@@ -28,10 +28,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="bg-white dark:bg-primary-800 shadow overflow-hidden sm:rounded-lg">
+<div class="bg-primary-500 dark:bg-neutral-700 shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-primary-900 dark:text-primary-100">Drug List</h3>
-        <p class="mt-1 max-w-2xl text-sm text-primary-500 dark:text-primary-400">Browse the list of available drugs below.</p>
+        <h3 class="text-lg leading-6 font-medium text-gray-600 dark:text-gray-400">Drug List</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Browse the list of available drugs below.</p>
     </div>
     <div class="border-t border-primary-200 dark:border-primary-700 px-4 py-5 sm:px-6">
         <form method="get" class="space-y-6">
@@ -39,9 +39,9 @@
             <div class="flex justify-center">
                 <div class="relative w-full max-w-xl">
                     <input type="text" name="search" placeholder="Search drugs..." value="{{ search_query }}"
-                           class="block w-full pl-10 pr-3 py-2 border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm rounded-full bg-white dark:bg-primary-700 text-primary-900 dark:text-primary-100">
+                           class="block w-full pl-10 pr-3 py-2 border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm rounded-full bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-primary-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
@@ -51,18 +51,18 @@
             <!-- Filters -->
             <div class="flex flex-wrap items-center gap-4 justify-center">
                 <div class="flex items-center">
-                    <label for="items_per_page" class="mr-2 text-sm font-medium text-primary-700 dark:text-primary-300">Items per page:</label>
+                    <label for="items_per_page" class="mr-2 text-sm font-medium text-gray-600 dark:text-gray-400">Items per page:</label>
                     <select name="items_per_page" id="items_per_page"
-                            class="block w-24 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-primary-700 text-primary-900 dark:text-primary-100">
+                            class="block w-24 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100">
                         {% for num in items_per_page_options %}
                             <option value="{{ num }}" {% if num == items_per_page %}selected{% endif %}>{{ num }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="flex items-center">
-                    <label for="route" class="mr-2 text-sm font-medium text-primary-700 dark:text-primary-300">Route:</label>
+                    <label for="route" class="mr-2 text-sm font-medium text-gray-600 dark:text-gray-400">Route:</label>
                     <select name="route" id="route"
-                            class="block w-40 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-primary-700 text-primary-900 dark:text-primary-100">
+                            class="block w-40 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100">
                         <option value="">All</option>
                         {% for route in routes %}
                             <option value="{{ route.id }}" {% if route.id == selected_route %}selected{% endif %}>{{ route.name }}</option>
@@ -70,9 +70,9 @@
                     </select>
                 </div>
                 <div class="flex items-center">
-                    <label for="use" class="mr-2 text-sm font-medium text-primary-700 dark:text-primary-300">Use:</label>
+                    <label for="use" class="mr-2 text-sm font-medium text-gray-600 dark:text-gray-400">Use:</label>
                     <select name="use" id="use"
-                            class="block w-40 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-primary-700 text-primary-900 dark:text-primary-100">
+                            class="block w-40 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100">
                         <option value="">All</option>
                         {% for use in uses %}
                             <option value="{{ use.id }}" {% if use.id == selected_use %}selected{% endif %}>{{ use.name }}</option>
@@ -80,9 +80,9 @@
                     </select>
                 </div>
                 <div class="flex items-center">
-                    <label for="side_effect" class="mr-2 text-sm font-medium text-primary-700 dark:text-primary-300">Side Effect:</label>
+                    <label for="side_effect" class="mr-2 text-sm font-medium text-gray-600 dark:text-gray-400">Side Effect:</label>
                     <select name="side_effect" id="side_effect"
-                            class="block w-40 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-primary-700 text-primary-900 dark:text-primary-100">
+                            class="block w-40 pl-3 pr-10 py-2 text-base border-primary-300 dark:border-primary-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100">
                         <option value="">All</option>
                         {% for side_effect in side_effects %}
                             <option value="{{ side_effect.id }}" {% if side_effect.id == selected_side_effect %}selected{% endif %}>{{ side_effect.name }}</option>
@@ -94,7 +94,7 @@
             <!-- Apply Filters Button -->
             <div class="flex justify-center">
                 <button type="submit"
-                        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-neutral-700 hover:text-neutral-200 bg-secondary-500 hover:bg-secondary-600 dark:bg-secondary-500 dark:hover:bg-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                     Apply Filters
                 </button>
             </div>
@@ -104,18 +104,18 @@
         <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             {% for drug in drugs %}
                 <a href="{% url 'drug_detail' drug.pk %}"
-                   class="block bg-white dark:bg-primary-700 shadow rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                   class="block bg-white dark:bg-neutral-700 shadow rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     {% if drug.image and drug.image.url %}
                         <img src="{{ drug.image.url }}" alt="{{ drug.brand_name }}"
                              class="h-32 w-full object-cover">
                     {% endif %}
                     <div class="p-4">
-                        <h4 class="text-sm font-medium text-primary-900 dark:text-primary-100">{{ drug.brand_name }}</h4>
-                        <p class="mt-1 text-sm text-primary-500 dark:text-primary-400">{{ drug.route.name }}</p>
+                        <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ drug.brand_name }}</h4>
+                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ drug.route.name }}</p>
                     </div>
                 </a>
             {% empty %}
-                <p class="col-span-full text-center text-primary-500 dark:text-primary-400">No drugs found matching your criteria.</p>
+                <p class="col-span-full text-center text-gray-600 dark:text-gray-400">No drugs found matching your criteria.</p>
             {% endfor %}
         </div>
     </div>

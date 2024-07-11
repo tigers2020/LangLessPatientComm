@@ -3,19 +3,19 @@
 {% block title %}Our Mission{% endblock %}
 
 {% block content %}
-<div class="bg-tertiary-100 dark:bg-primary-700 py-12">
+<div class="bg-primary-100 dark:bg-neutral-700 py-12">
   <div class="container mx-auto px-6 lg:px-8">
-    <h1 class="text-4xl font-bold text-center text-primary-600 dark:text-tertiary-100 mb-12">Our Mission</h1>
+    <h1 class="text-4xl font-bold text-center text-neutral-700 dark:text-neutral-300 mb-12">Our Mission</h1>
     {% for content in mission_contents %}
-      <div class="mb-12 bg-accent-100 dark:bg-primary-600 p-6 rounded-lg shadow-md">
+      <div class="mb-12 bg-primary-50 dark:bg-neutral-600 p-6 rounded-lg shadow-md">
         {% if content.image %}
           <img src="{{ content.image.url }}" alt="{{ content.title }}" class="w-full h-auto rounded-lg mb-6">
         {% endif %}
-        <h2 class="text-3xl font-bold text-primary-500 dark:text-tertiary-200 mb-4">{{ content.title }}</h2>
+        <h2 class="text-3xl font-bold text-neutral-600 dark:text-neutral-400 mb-4">{{ content.title }}</h2>
         {% if content.subtitle %}
-          <h3 class="text-xl text-primary-400 dark:text-tertiary-300 mb-4">{{ content.subtitle }}</h3>
+          <h3 class="text-xl text-neutral-500 dark:text-neutral-400 mb-4">{{ content.subtitle }}</h3>
         {% endif %}
-        <div class="text-lg text-primary-600 dark:text-tertiary-100 leading-relaxed">{{ content.content|safe }}</div>
+        <div class="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">{{ content.content|safe }}</div>
       </div>
     {% endfor %}
   </div>

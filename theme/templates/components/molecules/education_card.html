@@ -1,20 +1,20 @@
 <!-- templates/components/molecules/education_card.html -->
 {% load static %}
 
-<div class="w-full md:w-1/3 bg-accent-100 dark:bg-primary-500 p-6 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold mb-4 text-primary-600 dark:text-tertiary-100">Education</h2>
+<div class="w-full md:w-1/3 bg-primary-100 dark:bg-neutral-700 p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Education</h2>
     <div class="flex flex-col items-center">
         <div class="relative w-48 h-64 mb-4">
             <img src="{% static 'images/main/book_cover.jpg' %}" alt="Book Cover"
                  class="w-full h-full object-cover rounded-lg shadow-md">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-600 dark:to-primary-900 opacity-50 rounded-lg"></div>
-            <div class="absolute bottom-4 left-4 text-tertiary-100 text-xl font-bold">Learn More</div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-600 dark:to-neutral-700 opacity-50 rounded-lg"></div>
+            <div class="absolute bottom-4 left-4 text-neutral-100 dark:text-neutral-300 text-xl font-bold">Learn More</div>
         </div>
-        <p class="text-primary-500 dark:text-tertiary-300 text-center mb-4">
+        <p class="text-neutral-600 dark:text-neutral-400 text-center mb-4">
             Explore our educational resources and tools to improve your healthcare knowledge.
         </p>
         <a href="{% url "scenario_list" %}"
-           class="bg-secondary-400 hover:bg-secondary-500 dark:bg-primary-400 dark:hover:bg-primary-500 text-primary-700 dark:text-tertiary-100 font-bold py-2 px-4 rounded transition duration-300">
+           class="bg-secondary-400 hover:bg-secondary-500 dark:bg-neutral-600 dark:hover:bg-neutral-500 text-neutral-700 dark:text-neutral-300 font-bold py-2 px-4 rounded transition duration-300">
             Get Started
         </a>
     </div>

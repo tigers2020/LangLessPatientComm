@@ -11,56 +11,56 @@
 {% block content %}
 <div class="container mx-auto my-8 px-4">
     <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Prescription Refill Guide</h1>
-        <p class="text-gray-600 dark:text-gray-400 mt-2">Important information and tips for refilling your prescriptions</p>
+        <h1 class="text-3xl font-bold text-neutral-700 dark:text-neutral-300">Prescription Refill Guide</h1>
+        <p class="text-neutral-600 dark:text-neutral-400 mt-2">Important information and tips for refilling your prescriptions</p>
     </div>
 
     <!-- Refill Process Articles -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {% for article in guide %}
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+            <div class="bg-primary-100 dark:bg-neutral-700 rounded-lg shadow-md overflow-hidden">
                 {% if article.featured_image %}
                     <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="w-full h-48 object-cover">
                 {% endif %}
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{{ article.title }}</h2>
-                    <div class="prose dark:prose-invert max-w-none">
+                    <h2 class="text-xl font-semibold mb-4 text-neutral-700 dark:text-neutral-300">{{ article.title }}</h2>
+                    <div class="prose dark:prose-invert max-w-none text-neutral-600 dark:text-neutral-400">
                         {{ article.content|safe }}
                     </div>
                 </div>
             </div>
         {% empty %}
-            <p class="col-span-3 text-center text-gray-500 dark:text-gray-400">No refill guidelines available at the moment.</p>
-        {% endfor %}
+            <p class="col-span-3 text-center text-neutral-500 dark:text-neutral-400">No refill guidelines available at the moment.</p>
+{% endfor %}
     </div>
 
     <!-- Refill Tips -->
-    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 mb-8">
-        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Refill Tips</h2>
+    <div class="bg-primary-200 dark:bg-neutral-600 rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Refill Tips</h2>
         <ul class="space-y-4">
             {% for tip in tip %}
-                <li class="bg-white dark:bg-gray-800 rounded p-4 shadow flex items-start">
+                <li class="bg-primary-100 dark:bg-neutral-700 rounded p-4 shadow flex items-start">
                     <img src="{% static 'images/main/warning.png' %}" alt="Info" class="w-6 h-6 mr-3 mt-1 flex-shrink-0">
                     <div>
-                        <h3 class="font-semibold text-lg mb-2 text-gray-800 dark:text-gray-200">{{ tip.title }}</h3>
-                        <div class="text-gray-600 dark:text-gray-400 prose dark:prose-invert max-w-none">
+                        <h3 class="font-semibold text-lg mb-2 text-neutral-700 dark:text-neutral-300">{{ tip.title }}</h3>
+                        <div class="text-neutral-600 dark:text-neutral-400 prose dark:prose-invert max-w-none">
                             {{ tip.content|safe }}
                         </div>
                     </div>
                 </li>
             {% empty %}
-                <li class="text-gray-500 dark:text-gray-400">No refill tips available at the moment.</li>
+                <li class="text-neutral-500 dark:text-neutral-400">No refill tips available at the moment.</li>
             {% endfor %}
         </ul>
     </div>
 
     <!-- Pharmacy Contact Information -->
-    <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-blue-800 dark:text-blue-200">Pharmacy Contacts</h2>
-        <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+    <div class="bg-secondary-100 dark:bg-secondary-700 rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Pharmacy Contacts</h2>
+        <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
             <li><strong>Main Pharmacy:</strong> [Insert Pharmacy Number]</li>
             <li><strong>24/7 Pharmacy Helpline:</strong> [Insert Helpline Number]</li>
-            <li><strong>Online Refill Portal:</strong> <a href="#" class="underline">www.pharmacyrefill.com</a></li>
+            <li><strong>Online Refill Portal:</strong> <a href="#" class="underline text-secondary-600 dark:text-secondary-300 hover:text-secondary-700 dark:hover:text-secondary-200">www.pharmacyrefill.com</a></li>
             <!-- Add more pharmacy contacts as needed -->
         </ul>
     </div>
