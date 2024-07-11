@@ -3,16 +3,22 @@
 {% block title %}Extracted Text{% endblock %}
 
 {% block content %}
+<!-- Container for the Extracted Text Page Content -->
 <div class="container mx-auto p-4">
+    <!-- Page Title -->
     <h1 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Extracted Text</h1>
+
+    <!-- Display the Extracted Text -->
     <div class="bg-info-400 dark:bg-neutral-700/50 p-4 rounded shadow-md">
         <p class="text-neutral-600 dark:text-neutral-400">{{ text }}</p>
     </div>
 
+    <!-- Button to Listen to Extracted Info -->
     <button data-popover-target="popover-tts" type="button" id="tts-button" class="mt-6 text-white bg-secondary-600 hover:bg-secondary-700 focus:ring-4 focus:outline-none focus:ring-secondary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-secondary-500 dark:hover:bg-secondary-600 dark:focus:ring-secondary-400 relative">
         Listen to Extracted Info
     </button>
 
+    <!-- Popover for TTS Feature Advisor -->
     <div data-popover id="popover-tts" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-neutral-500 transition-opacity duration-300 bg-white border border-neutral-200 rounded-lg shadow-sm opacity-0 dark:text-neutral-400 dark:border-neutral-600 dark:bg-neutral-800">
         <div class="px-3 py-2 bg-primary-100 border-b border-neutral-200 rounded-t-lg dark:border-neutral-600 dark:bg-neutral-700">
             <h3 class="font-semibold text-neutral-700 dark:text-neutral-300">Feature Advisor</h3>
@@ -23,14 +29,17 @@
         <div data-popper-arrow></div>
     </div>
 
+    <!-- Audio Player Container -->
     <div id="audio-player-container" class="mt-4 hidden">
         <audio id="audio-player" controls class="w-full">
             Your browser does not support the audio element.
         </audio>
     </div>
 
+    <!-- Extracted Entities Section -->
     <h2 class="text-xl font-bold mt-6 text-neutral-700 dark:text-neutral-300">Extracted Entities</h2>
     <div class="mt-4">
+        <!-- Loop through the Extracted Entities -->
         {% for entity in prescription_info.entities %}
             <p class="text-neutral-600 dark:text-neutral-400"><strong>{{ entity.label }}:</strong> {{ entity.text }}</p>
         {% endfor %}
@@ -40,9 +49,12 @@
 
 {% block custom_js %}
 <script>
+    // Event listener for TTS button click
     document.getElementById('tts-button').addEventListener('click', function() {
+        // Extract text from the entity paragraphs
         const text = Array.from(document.querySelectorAll('.mt-4 p')).map(p => p.innerText).join(', ');
 
+        // Send text to the server for TTS conversion
         fetch("{% url 'text_to_speech' %}", {
             method: 'POST',
             headers: {
@@ -67,7 +79,7 @@
         .catch(error => console.error('Error:', error));
     });
 
-    // Popover functionality
+    // Popover functionality for TTS button
     const ttsButton = document.getElementById('tts-button');
     const popover = document.getElementById('popover-tts');
 

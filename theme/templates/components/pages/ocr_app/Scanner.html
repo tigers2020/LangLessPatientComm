@@ -11,33 +11,28 @@
                     Reset
                 </button>
                 <h1 class="text-lg mx-auto font-bold text-neutral-700 dark:text-neutral-300">Scanner</h1>
-                <button id="capture-button"
-                        class="bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <button id="capture-button" class="bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                 </button>
             </div>
 
             <!-- Molecule: Dropzone -->
             <div id="dropzone-container" class="w-full">
-                <label for="dropzone-file"
-                       class="flex flex-col items-center justify-center w-full border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-b-lg cursor-pointer bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700">
-                <span id="dropzone-content" class="flex flex-col items-center justify-center p-4 w-full">
-                    <!-- Content will be dynamically updated -->
-                </span>
+                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-b-lg cursor-pointer bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700">
+                    <span id="dropzone-content" class="flex flex-col items-center justify-center p-4 w-full">
+                        <!-- Content will be dynamically updated -->
+                    </span>
                     <input id="dropzone-file" type="file" class="hidden" accept="image/*"/>
                 </label>
             </div>
 
             <!-- Atom: Send Button -->
             <div class="w-full mt-4">
-                <button id="send-button"
-                        class="w-full bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">Send
+                <button id="send-button" class="w-full bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
+                    Send
                 </button>
             </div>
         </div>
@@ -68,9 +63,8 @@
                         width = height * aspectRatio;
                     }
                     dropzoneContent.innerHTML = `
-                    <img src="${image}" alt="Preview"
-                         style="width: ${width}px; height: ${height}px; object-fit: contain;" />
-                `;
+                        <img src="${image}" alt="Preview" style="width: ${width}px; height: ${height}px; object-fit: contain;" />
+                    `;
                     dropzoneContainer.style.height = `${height + 40}px`;
                 };
                 img.src = image;
@@ -82,15 +76,13 @@
         // Function to reset the dropzone to its initial state
         function resetDropzone() {
             dropzoneContent.innerHTML = `
-            <svg class="w-8 h-8 mb-4 text-neutral-500 dark:text-neutral-400" aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-            </svg>
-            <p class="mb-2 text-sm text-neutral-500 dark:text-neutral-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">You can also paste an image from clipboard</p>
-        `;
+                <svg class="w-8 h-8 mb-4 text-neutral-500 dark:text-neutral-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-2 text-sm text-neutral-500 dark:text-neutral-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400">You can also paste an image from clipboard</p>
+            `;
             dropzoneContainer.style.height = '160px';
             image = null;
         }
@@ -135,24 +127,24 @@
                 },
                 redirect: 'follow'
             })
-                .then(response => {
-                    if (response.redirected) {
-                        window.location.href = response.url;
-                    } else if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    } else {
-                        return response.json();
-                    }
-                })
-                .then(data => {
-                    if (data && data.redirect) {
-                        window.location.href = data.redirect;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while uploading the image. Please try again.');
-                });
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data && data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while uploading the image. Please try again.');
+            });
         }
 
         // Function to handle camera capture

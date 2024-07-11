@@ -2,9 +2,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <!-- Page Header -->
     <h1 class="text-2xl font-bold mb-4">{{ page.scenario.title }} - Page {{ page.order }}</h1>
     <div class="mb-4">{{ page.content|safe }}</div>
 
+    <!-- Images Section -->
     <h2 class="text-xl font-semibold mb-2">Images</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 comic-book-grid">
         {% for image in page.images.all %}
@@ -15,13 +17,16 @@
         {% endfor %}
     </div>
 
+    <!-- Choices or Back to Scenario Link -->
     {% if not page.choices.all %}
         <div class="mt-4">
+            <!-- Back to Scenario Button -->
             <a href="{% url 'scenario_list' %}" class="text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
                 Back to Scenario
             </a>
         </div>
     {% else %}
+        <!-- Choices Section -->
         <h2 class="text-xl font-semibold mb-2 mt-8">Choices</h2>
         <ul class="list-disc pl-5">
             {% for choice in page.choices.all %}

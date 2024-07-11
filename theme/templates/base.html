@@ -1,5 +1,3 @@
-// templates/base.html
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +12,6 @@
         <!-- Header -->
         {% include 'components/organisms/header.html' %}
 
-        {% block breadcrumbs %}
-        {% endblock %}
         <!-- Main content area -->
         <main id="main-content" class="flex-grow container mx-auto px-4 mt-16 lg:max-w-screen-lg bg-primary-100 dark:bg-neutral-700 rounded-lg shadow-md">
             {% block content %}{% endblock %}

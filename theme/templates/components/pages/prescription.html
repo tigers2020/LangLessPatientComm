@@ -10,6 +10,7 @@
 
 {% block content %}
 <div class="container mx-auto my-8 px-4">
+    <!-- Page Header -->
     <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-neutral-700 dark:text-neutral-300">Prescription Refill Guide</h1>
         <p class="text-neutral-600 dark:text-neutral-400 mt-2">Important information and tips for refilling your prescriptions</p>
@@ -31,14 +32,14 @@
             </div>
         {% empty %}
             <p class="col-span-3 text-center text-neutral-500 dark:text-neutral-400">No refill guidelines available at the moment.</p>
-{% endfor %}
+        {% endfor %}
     </div>
 
     <!-- Refill Tips -->
     <div class="bg-primary-200 dark:bg-neutral-600 rounded-lg p-6 mb-8">
         <h2 class="text-2xl font-bold mb-4 text-neutral-700 dark:text-neutral-300">Refill Tips</h2>
         <ul class="space-y-4">
-            {% for tip in tip %}
+            {% for tip in tips %}
                 <li class="bg-primary-100 dark:bg-neutral-700 rounded p-4 shadow flex items-start">
                     <img src="{% static 'images/main/warning.png' %}" alt="Info" class="w-6 h-6 mr-3 mt-1 flex-shrink-0">
                     <div>
