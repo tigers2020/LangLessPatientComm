@@ -11,7 +11,7 @@ class ScenarioListView(ListView):
         context = super().get_context_data(**kwargs)
         context['breadcrumbs'] = [
             {'name': 'Home', 'url': reverse_lazy('home')},
-            {'name': 'Scenarios', 'url': None}  # Current page doesn't have a URL
+            {'name': 'Scenarios', 'url': '#'}  # Current page URL as '#'
         ]
         return context
 
@@ -25,7 +25,7 @@ class ScenarioDetailView(DetailView):
         context['breadcrumbs'] = [
             {'name': 'Home', 'url': reverse_lazy('home')},
             {'name': 'Scenarios', 'url': reverse_lazy('scenario_list')},
-            {'name': self.object.title, 'url': None}  # Current page doesn't have a URL
+            {'name': self.object.title, 'url': '#'}  # Current page URL as '#'
         ]
         return context
 
@@ -41,7 +41,7 @@ class PageDetailView(DetailView):
             {'name': 'Home', 'url': reverse_lazy('home')},
             {'name': 'Scenarios', 'url': reverse_lazy('scenario_list')},
             {'name': page.scenario.title, 'url': reverse_lazy('scenario_detail', kwargs={'pk': page.scenario.pk})},
-            {'name': f'Page {page.order}', 'url': None}  # Current page doesn't have a URL
+            {'name': f'Page {page.order}', 'url': '#'}  # Current page URL as '#'
         ]
         return context
 
@@ -55,8 +55,8 @@ class ChoiceDetailView(DetailView):
         context['breadcrumbs'] = [
             {'name': 'Home', 'url': reverse_lazy('home')},
             {'name': 'Scenarios', 'url': reverse_lazy('scenario_list')},
-            {'name': 'Choices', 'url': None},  # Parent breadcrumb
-            {'name': self.object.text, 'url': None}  # Current page doesn't have a URL
+            {'name': 'Choices', 'url': '#'},  # Parent breadcrumb URL as '#'
+            {'name': self.object.text, 'url': '#'}  # Current page URL as '#'
         ]
         return context
 
@@ -70,7 +70,7 @@ class OutcomeDetailView(DetailView):
         context['breadcrumbs'] = [
             {'name': 'Home', 'url': reverse_lazy('home')},
             {'name': 'Scenarios', 'url': reverse_lazy('scenario_list')},
-            {'name': 'Outcomes', 'url': None},  # Parent breadcrumb
-            {'name': f'Outcome for {self.object.page}', 'url': None}  # Current page doesn't have a URL
+            {'name': 'Outcomes', 'url': '#'},  # Parent breadcrumb URL as '#'
+            {'name': f'Outcome for {self.object.page}', 'url': '#'}  # Current page URL as '#'
         ]
         return context

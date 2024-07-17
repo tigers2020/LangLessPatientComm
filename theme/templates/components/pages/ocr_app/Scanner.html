@@ -1,42 +1,62 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Scanner{% endblock %}
 
 {% block content %}
-    <div class="flex flex-col min-h-screen">
-        <div class="flex-grow flex flex-col items-center justify-center p-4 w-full max-w-3xl mx-auto">
-            <!-- Atom: Header -->
-            <div class="w-full bg-neutral-500 dark:bg-neutral-600 p-2 flex justify-between items-center rounded-t-lg text-center">
-                <button id="reset-button" class="bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
-                    Reset
-                </button>
-                <h1 class="text-lg mx-auto font-bold text-neutral-700 dark:text-neutral-300">Scanner</h1>
-                <button id="capture-button" class="bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                </button>
+    <section>
+        <div class="grid grid-cols-3 gap-4 my-8 items-center justify-center p-4 w-full max-w-3xl mx-auto">
+            <div class="flex justify-center">
+                <img class="w-32 h-32" src="{% static 'images/main/bottle.png' %}" alt="bottle">
             </div>
+            <div class="flex justify-center">
+                <img class="w-32 h-32" src="{% static 'images/main/translate.png' %}" alt="translate">
+            </div>
+            <div class="flex justify-center">
+                <img class="w-32 h-32" src="{% static 'images/main/volume.png' %}" alt="volume">
+            </div>
+        </div>
+        <div class="flex flex-col   ">
+            <div class="flex-grow flex flex-col items-center justify-center p-4 w-full max-w-3xl mx-auto">
+                <!-- Atom: Header -->
+                <div class="w-full bg-neutral-500 dark:bg-neutral-600 p-2 flex justify-between items-center rounded-t-lg text-center">
+                    <button id="reset-button"
+                            class="bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
+                        Reset
+                    </button>
+                    <h1 class="text-lg mx-auto font-bold text-neutral-700 dark:text-neutral-300">Scanner</h1>
+                    <button id="capture-button"
+                            class="bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </button>
+                </div>
 
-            <!-- Molecule: Dropzone -->
-            <div id="dropzone-container" class="w-full">
-                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-b-lg cursor-pointer bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700">
+                <!-- Molecule: Dropzone -->
+                <div id="dropzone-container" class="w-full">
+                    <label for="dropzone-file"
+                           class="flex flex-col items-center justify-center w-full border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-b-lg cursor-pointer bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700">
                     <span id="dropzone-content" class="flex flex-col items-center justify-center p-4 w-full">
                         <!-- Content will be dynamically updated -->
                     </span>
-                    <input id="dropzone-file" type="file" class="hidden" accept="image/*"/>
-                </label>
-            </div>
+                        <input id="dropzone-file" type="file" class="hidden" accept="image/*"/>
+                    </label>
+                </div>
 
-            <!-- Atom: Send Button -->
-            <div class="w-full mt-4">
-                <button id="send-button" class="w-full bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
-                    Send
-                </button>
+                <!-- Atom: Send Button -->
+                <div class="w-full mt-4">
+                    <button id="send-button"
+                            class="w-full bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
+                        Send
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
 
 {% block custom_js %}
@@ -127,24 +147,24 @@
                 },
                 redirect: 'follow'
             })
-            .then(response => {
-                if (response.redirected) {
-                    window.location.href = response.url;
-                } else if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                } else {
-                    return response.json();
-                }
-            })
-            .then(data => {
-                if (data && data.redirect) {
-                    window.location.href = data.redirect;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while uploading the image. Please try again.');
-            });
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    } else {
+                        return response.json();
+                    }
+                })
+                .then(data => {
+                    if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while uploading the image. Please try again.');
+                });
         }
 
         // Function to handle camera capture

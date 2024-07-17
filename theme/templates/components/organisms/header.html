@@ -2,21 +2,22 @@
 
 {% load static %}
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-primary-500 dark:bg-dark-primary-600 p-4 shadow-md">
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary-600 dark:bg-dark-primary-600 p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
         <!-- Title (centered and clickable, with horizontal alignment) -->
-        <div class="flex items-center justify-center w-1/4 text-center">
-            <a href="{% url 'home' %}"
-               class="text-xl font-bold text-neutral-800 hover:text-neutral-700 dark:text-neutral-300 dark:hover:text-neutral-200 flex">
-                <img src="{% static 'images/logos/logo-green.png' %}" alt="logo" class="w-8 h-8 mr-2"/>
-                <h2 class="hidden md:block">
-                    LangLessPatientComm
-                </h2>
-                <h2 class="sm:block hidden">
-                    LLPC
-                </h2>
-            </a>
-        </div>
+<div class="flex items-center justify-center w-1/4 text-center">
+    <a href="{% url 'home' %}"
+       class="text-xl font-bold text-neutral-800 hover:text-neutral-700 dark:text-neutral-300 dark:hover:text-neutral-200 flex">
+        <img src="{% static 'images/logos/logo-white.png' %}" alt="logo" class="w-8 h-8 mr-2 dark:hidden"/>
+        <img src="{% static 'images/logos/logo-green.png' %}" alt="logo" class="w-8 h-8 mr-2 hidden dark:block"/>
+        <h2 class="hidden md:block">
+            LangLessPatientComm
+        </h2>
+        <h2 class="sm:block hidden">
+            LLPC
+        </h2>
+    </a>
+</div>
 
         <!-- Navigation and user controls -->
         <div class="w-1/4 flex items-center justify-end space-x-2 sm:space-x-3">

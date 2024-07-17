@@ -2,6 +2,7 @@
 
 <!-- Static files loade -->
 {% load static %}
+{% load custom_filters %}  <!-- Load your custom filter -->
 
 {% block title %}Doctor Detail{% endblock %}
 
@@ -10,20 +11,20 @@
         <div class="container mx-auto px-4 py-8">
 
             <!-- Heading Section -->
-            <h1 class="text-3xl font-bold mb-6 text-gray-600 dark:text-gray-400">{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}</h1>
+            <h1 class="text-3xl font-bold mb-6 text-gray-600 dark:text-gray-100">{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}</h1>
 
-            <div class="bg-primary-500 dark:bg-neutral-700 shadow-md rounded-lg overflow-hidden p-6">
+            <div class="bg-primary-50 dark:bg-neutral-700 shadow-md rounded-lg overflow-hidden p-6">
 
                 <!-- Doctor's Profile Picture and Basic Info Section -->
                 <div class="flex items-center mb-4">
                     <div class="w-24 h-24 bg-primary-200 dark:bg-primary-700 rounded-full mr-4"></div>
                     <div>
-                        <h2 class="text-xl font-bold text-gray-600 dark:text-gray-400">{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}</h2>
+                        <h2 class="text-xl font-bold text-gray-600 dark:text-gray-100">{{ doctor.provider_first_name }} {{ doctor.provider_last_name }}</h2>
                         {% if doctor.primary_specialty %}
-                            <p class="text-gray-600 dark:text-gray-400">{{ doctor.primary_specialty.name }}</p>
+                            <p class="text-gray-600 dark:text-gray-100">{{ doctor.primary_specialty.name }}</p>
                         {% endif %}
                         {% if doctor.credential %}
-                            <p class="text-gray-600 dark:text-gray-400">{{ doctor.credential }}</p>
+                            <p class="text-gray-600 dark:text-gray-100">{{ doctor.credential }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -31,13 +32,13 @@
                 <!-- Contact Information Section -->
                 {% if doctor.telephone_number or doctor.address_line_1 or doctor.address_line_2 or doctor.city or doctor.state or doctor.zip_code %}
                     <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-secondary-500 dark:text-secondary-300">Contact
+                        <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-100">Contact
                             Information</h3>
                         {% if doctor.telephone_number %}
-                            <p class="text-gray-600 dark:text-gray-400">Phone: {{ doctor.telephone_number }}</p>
+                <p class="text-gray-600 dark:text-gray-100">Phone: {{ doctor.telephone_number|phone_format }}</p>
                         {% endif %}
                         {% if doctor.address_line_1 or doctor.address_line_2 or doctor.city or doctor.state or doctor.zip_code %}
-                            <p class="text-gray-600 dark:text-gray-400">
+                            <p class="text-gray-600 dark:text-gray-100">
                                 Address: {{ doctor.address_line_1 }} {{ doctor.address_line_2 }}, {{ doctor.city }}, {{ doctor.state }} {{ doctor.zip_code }}</p>
                         {% endif %}
                     </div>
@@ -46,9 +47,9 @@
                 <!-- Education Section -->
                 {% if doctor.med_school or doctor.grad_year %}
                     <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-secondary-500 dark:text-secondary-300">Education</h3>
+                        <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-100">Education</h3>
                         {% if doctor.med_school %}
-                            <p class="text-gray-600 dark:text-gray-400">
+                            <p class="text-gray-600 dark:text-gray-100">
                                 {{ doctor.med_school }}{% if doctor.grad_year %} (Graduated: {{ doctor.grad_year }}
                                     ){% endif %}</p>
                         {% endif %}
@@ -56,16 +57,16 @@
                 {% endif %}
 
                 <!-- Specialties Section -->
-                {% if doctor.primary_specialty or doctor.secondary_specialty %}
+                {% if doctor.primary_specialty or doctor.neutral_specialty %}
                     <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-secondary-500 dark:text-secondary-300">Specialties</h3>
+                        <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-100">Specialties</h3>
                         {% if doctor.primary_specialty %}
-                            <p class="text-gray-600 dark:text-gray-400">Primary
+                            <p class="text-gray-600 dark:text-gray-100">Primary
                                 Specialty: {{ doctor.primary_specialty.name }}</p>
                         {% endif %}
-                        {% if doctor.secondary_specialty %}
-                            <p class="text-gray-600 dark:text-gray-400">Secondary
-                                Specialty: {{ doctor.secondary_specialty }}</p>
+                        {% if doctor.neutral_specialty %}
+                            <p class="text-gray-600 dark:text-gray-100">neutral
+                                Specialty: {{ doctor.neutral_specialty }}</p>
                         {% endif %}
                     </div>
                 {% endif %}
@@ -73,8 +74,8 @@
                 <!-- Facility Section -->
                 {% if doctor.facility_name %}
                     <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-secondary-500 dark:text-secondary-300">Facility</h3>
-                        <p class="text-gray-600 dark:text-gray-400">{{ doctor.facility_name }}</p>
+                        <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-100">Facility</h3>
+                        <p class="text-gray-600 dark:text-gray-100">{{ doctor.facility_name }}</p>
                     </div>
                 {% endif %}
             </div>

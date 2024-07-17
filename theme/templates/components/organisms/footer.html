@@ -1,18 +1,20 @@
 <!-- theme/templates/components/molecules/footer.html -->
 {% load static %}
 <div class="mt-16"></div>
-<footer class="bg-primary-500 dark:bg-dark-primary-500 text-neutral-800 dark:text-neutral-300 py-4 mt-auto">
+<footer class="bg-primary-600 dark:bg-dark-primary-500 text-neutral-800 dark:text-neutral-300 py-4 mt-auto">
     <div class="container mx-auto px-4 mb-5">
         <div class="flex flex-col sm:flex-row justify-between items-center">
             <div class="flex items-center justify-center w-1/4 text-center">
-                <img src="{% static 'images/logos/logo-green.png' %}" alt="logo" class="w-8 h-8 mr-2"/>
-                LangLessPatientComm
+                <img src="{% static 'images/logos/logo-white.png' %}" alt="logo" class="w-8 h-8 mr-2 dark:hidden"/>
+                <img src="{% static 'images/logos/logo-green.png' %}" alt="logo"
+                     class="w-8 h-8 mr-2 hidden dark:block"/>
+                    LangLessPatientComm
             </div>
             <div class="text-right mr-10">
                 <a href="#" id="go-to-top"
                    class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 flex items-center">
                     Go to Top
-                    <div class="bg-secondary-300 dark:bg-secondary-700 w-8 h-8 rounded-full flex justify-center items-center ml-2">
+                    <div class="bg-neutral-50 w-8 h-8 rounded-full flex justify-center items-center ml-2">
                         <svg class="w-4 h-4 text-neutral-700 dark:text-neutral-300" fill="none" stroke="currentColor"
                              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -25,10 +27,10 @@
     </div>
 
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="flex flex-col items-center p-4">
                 <img src="{% static 'images/logos/RITLogo.png' %}" alt="RIT Logo"
-                     class="rounded-full w-40 h-40 bg-secondary-400"/>
+                     class="rounded-full w-40 h-40  "/>
             </div>
             <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">
                 <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">About Us</h2>
@@ -46,28 +48,34 @@
                        class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">The
                         Creators (Team 11)</a><br/>
                     <a href="{% url 'mission' %}"
-                       class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">Our Story</a>
+                       class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">Our
+                        Story</a>
                 </p>
             </div>
-            <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">
-                <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">Refugee Clinic Services</h2>
-                <p class="text-neutral-800 dark:text-neutral-400">
-                    Rochester Global Refugee Services helps refugees and immigrants resettle in the U.S. and supports
-                    international humanitarian efforts. We offer assistance, training, resource referrals, and
-                    connections to opportunities for self-sufficiency.
-                </p>
-            </div>
+            {#            <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">#}
+            {#                <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">Refugee Clinic Services</h2>#}
+            {#                <p class="text-neutral-800 dark:text-neutral-400 text-center">#}
+            {#                    Rochester Global Refugee Services helps refugees and immigrants resettle in the U.S. and supports#}
+            {#                    international humanitarian efforts. We offer assistance, training, resource referrals, and#}
+            {#                    connections to opportunities for self-sufficiency.#}
+            {#                </p>#}
+            {#            </div>#}
             <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">
                 <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">Features</h2>
                 <p>
                     <a href="{% url 'doctor-list' %}"
                        class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">Doctors</a><br/>
+                    <a href="{% url 'drug_list' %}"
+                       class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">
+                        Over the Counter
+                    </a><br/>
                     <a href="{% url 'scanner' %}"
                        class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">Prescription
                         Scanner</a><br/>
                     <a href="{% url 'prescription' %}"
-                       class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">Drug
-                        Finder</a><br/>
+                       class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">
+                        How to Refill
+                    </a><br/>
                     <a href="{% url 'emergency-contact' %}"
                        class="text-neutral-800 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300">Emergency
                         Information</a>
@@ -78,9 +86,9 @@
     <div class="container mx-auto flex justify-end px-5 py-5">
         <div class="flex justify-center items-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <img src="{% static 'images/logos/StudioLogo.png' %}" alt="Studio 930 Logo"
-                 class="w-48 bg-secondary-300 dark:bg-secondary-700"/>
+                 class="w-48 bg-neutral-50"/>
             <img src="{% static 'images/logos/RRHLogo.png' %}" alt="Rochester Regional Health Logo"
-                 class="w-48 bg-secondary-300 dark:bg-secondary-700"/>
+                 class="w-48 bg-neutral-50"/>
         </div>
     </div>
     <div class="text-center py-4 text-neutral-800 dark:text-neutral-300">

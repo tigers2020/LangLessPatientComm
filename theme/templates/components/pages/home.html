@@ -5,7 +5,7 @@
 {% block title %}Home - Healthcare Portal{% endblock %}
 
 {% block content %}
-    <section class="container mx-auto px-4 py-8 bg-primary-100 dark:bg-dark-primary-600 text-neutral-800 dark:text-neutral-300">
+    <section class="container mx-auto px-4 py-8 text-neutral-800 dark:text-neutral-300">
         <!-- Desktop Carousel -->
         <div id="article-carousel" class="relative w-full hidden md:block" data-carousel="slide">
             <!-- Carousel wrapper -->
@@ -73,7 +73,7 @@
         </div>
     </section>
 
-    <section class="container mx-auto bg-primary-50 dark:bg-dark-primary-100 px-4 py-8">
+    <section class="container mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row items-start justify-center gap-8">
             <!-- Education section -->
             {% include "components/molecules/education_card.html" %}
@@ -85,8 +85,8 @@
                     {% include "components/atoms/service_card.html" with url="emergency-contact" image="ambulance.png" title="Emergency Contact" %}
                     {% include "components/atoms/service_card.html" with url="drug_list" image="pills-bottle.png" title="Over The Counter" %}
                     {% include "components/atoms/service_card.html" with url="scanner" image="scan.png" title="Scanner" %}
+                    {% include "components/atoms/service_card.html" with url="#" image="extra.webp" title="Advertisement" %}
                     {% include "components/atoms/service_card.html" with url="prescription" image="refill.png" title="How to Refill" %}
-                    {% include "components/atoms/service_card.html" with url="#" image="extra.png" title="Extra Service 2" %}
                 </div>
             </div>
         </div>
