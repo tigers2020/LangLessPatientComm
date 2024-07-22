@@ -1,14 +1,17 @@
-# admin.py
-from django.contrib import admin
+# File: home/admin.py
 
+from django.contrib import admin
 from .models import TeamMember, MissionContent
 
-
 class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ('name', 'surname', 'role')
-    search_fields = ('name', 'surname', 'role')
+    """
+    Admin configuration for the TeamMember model.
+    """
+    list_display = ('first_name', 'last_name', 'role')  # Fields to display in the list view
+    search_fields = ('first_name', 'last_name', 'role')  # Enable search by first name, last name, and role
 
+# Register TeamMember model with its custom admin configuration
+admin.site.register(TeamMember, TeamMemberAdmin)
 
-admin.site.register(TeamMember)
-
+# Register MissionContent model without any custom admin configuration
 admin.site.register(MissionContent)

@@ -1,72 +1,94 @@
-# src/education/admin.py
+# File: education/admin.py
 
-# Import necessary modules
 from django.contrib import admin
+
 from .models import Scenario, Page, Image, Choice, Outcome
 
 
-# Image sections in the admin interface for a particular Scenario, Page, etc.
 class ImageInline(admin.TabularInline):
+    """
+    Inline configuration for Image model.
+    Allows adding images directly within the parent model's admin page.
+    """
     model = Image
-    extra = 1  # Number of extra empty forms
+    extra = 1  # Number of extra empty forms to display
 
 
-# Choice sections in the admin interface for a particular Scenario, Page, etc.
 class ChoiceInline(admin.TabularInline):
+    """
+    Inline configuration for Choice model.
+    Allows adding choices directly within the parent model's admin page.
+    """
     model = Choice
-    extra = 1
-    fk_name = 'page'
-
-# Page sections in the admin interface for a particular Scenario
+    extra = 1  # Number of extra empty forms to display
+    fk_name = 'page'  # Specify foreign key relationship
 
 
 class PageInline(admin.TabularInline):
+    """
+    Inline configuration for Page model.
+    Allows adding pages directly within the parent model's admin page.
+    """
     model = Page
-    extra = 1
+    extra = 1  # Number of extra empty forms to display
 
 
-# Outcome sections in the admin interface for a particular Scenario, Page, etc.
 class OutcomeInline(admin.TabularInline):
+    """
+    Inline configuration for Outcome model.
+    Allows adding outcomes directly within the parent model's admin page.
+    """
     model = Outcome
-    extra = 1
+    extra = 1  # Number of extra empty forms to display
 
 
-# Register Scenario to admin site. Customize the admin interface for Scenario model.
 @admin.register(Scenario)
 class ScenarioAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at', 'updated_at')  # Fields to display in list view
-    search_fields = ('title',)  # Searchable fields
-    inlines = [PageInline]  # Display Page inlines
+    """
+    Admin configuration for the Scenario model.
+    """
+    list_display = ('title', 'created_at', 'updated_at')  # Fields to display in the list view
+    search_fields = ('title',)  # Enable search by title
+    inlines = [PageInline]  # Display Page inlines within Scenario admin page
 
 
-# Register Page to admin site. Customize the admin interface for Page model.
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('scenario', 'order')  # Fields to display in list view
-    list_filter = ('scenario',)  # Fields for list filter
-    inlines = [ImageInline, ChoiceInline, OutcomeInline]  # Display Image, Choice and Outcome inlines
-    search_fields = ('scenario__title', 'content')  # Searchable fields
+    """
+    Admin configuration for the Page model.
+    """
+    list_display = ('scenario', 'order')  # Fields to display in the list view
+    list_filter = ('scenario',)  # Enable filtering by scenario
+    inlines = [ImageInline, ChoiceInline,
+               OutcomeInline]  # Display Image, Choice, and Outcome inlines within Page admin page
+    search_fields = ('scenario__title', 'content')  # Enable search by scenario title and content
 
 
-# Register Image to admin site. Customize the admin interface for Image model.
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('page', 'caption', 'order')  # Fields to display in list view
-    list_filter = ('page',)  # Fields for list filter
-    search_fields = ('caption',)  # Searchable fields
+    """
+    Admin configuration for the Image model.
+    """
+    list_display = ('page', 'caption', 'order')  # Fields to display in the list view
+    list_filter = ('page',)  # Enable filtering by page
+    search_fields = ('caption',)  # Enable search by caption
 
 
-# Register Choice to admin site. Customize the admin interface for Choice model.
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
-    list_display = ('page', 'text', 'next_page')  # Fields to display in list view
-    list_filter = ('page',)  # Fields for list filter
-    search_fields = ('text',)  # Searchable fields
+    """
+    Admin configuration for the Choice model.
+    """
+    list_display = ('page', 'text', 'next_page')  # Fields to display in the list view
+    list_filter = ('page',)  # Enable filtering by page
+    search_fields = ('text',)  # Enable search by text
 
 
-# Register Outcome to admin site. Customize the admin interface for Outcome model.
 @admin.register(Outcome)
 class OutcomeAdmin(admin.ModelAdmin):
-    list_display = ('page', 'is_end', 'next_scenario')  # Fields to display in list view
-    list_filter = ('is_end',)  # Fields for list filter
-    search_fields = ('description',)  # Searchable fields
+    """
+    Admin configuration for the Outcome model.
+    """
+    list_display = ('page', 'is_end', 'next_scenario')  # Fields to display in the list view
+    list_filter = ('is_end',)  # Enable filtering by end status
+    search_fields = ('description',)  # Enable search by description

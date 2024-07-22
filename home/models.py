@@ -1,6 +1,7 @@
+# File: home/models.py
+
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
-
 
 class TeamMember(models.Model):
     """
@@ -13,7 +14,6 @@ class TeamMember(models.Model):
         description (CKEditor5Field): A rich-text description of the team member.
         image_src (ImageField): The member's photo (can be optional).
     """
-
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
@@ -21,9 +21,10 @@ class TeamMember(models.Model):
     image_src = models.ImageField(upload_to='team_images/', blank=True, null=True)
 
     def __str__(self):
-        """Return the full name of the team member."""
+        """
+        Return the full name of the team member.
+        """
         return f"{self.first_name} {self.last_name}"
-
 
 class MissionContent(models.Model):
     """
@@ -39,7 +40,6 @@ class MissionContent(models.Model):
     Meta:
         ordering (list): A list of fields for the default ordering.
     """
-
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200, blank=True, null=True)
     content = CKEditor5Field()
@@ -47,9 +47,13 @@ class MissionContent(models.Model):
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
-        """Special attribute of a model class that provides metadata to Django."""
+        """
+        Special attribute of a model class that provides metadata to Django.
+        """
         ordering = ['order']
 
     def __str__(self):
-        """Return the title of the mission content."""
+        """
+        Return the title of the mission content.
+        """
         return self.title
