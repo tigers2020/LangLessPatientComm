@@ -6,9 +6,8 @@
         <div class="flex flex-col sm:flex-row justify-between items-center">
             <div class="flex items-center justify-center w-1/4 text-center">
                 <img src="{% static 'images/logos/logo-white.png' %}" alt="logo" class="w-8 h-8 mr-2 dark:hidden"/>
-                <img src="{% static 'images/logos/logo-green.png' %}" alt="logo"
-                     class="w-8 h-8 mr-2 hidden dark:block"/>
-                    LangLessPatientComm
+                <img src="{% static 'images/logos/logo-green.png' %}" alt="logo" class="w-8 h-8 mr-2 hidden dark:block"/>
+                LangLessPatientComm
             </div>
             <div class="text-right mr-10">
                 <a href="#" id="go-to-top"
@@ -30,7 +29,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="flex flex-col items-center p-4">
                 <img src="{% static 'images/logos/RITLogo.png' %}" alt="RIT Logo"
-                     class="rounded-full w-40 h-40  "/>
+                     class="rounded-full w-40 h-40 dark:invert"/>
             </div>
             <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">
                 <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">About Us</h2>
@@ -52,14 +51,6 @@
                         Story</a>
                 </p>
             </div>
-            {#            <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">#}
-            {#                <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">Refugee Clinic Services</h2>#}
-            {#                <p class="text-neutral-800 dark:text-neutral-400 text-center">#}
-            {#                    Rochester Global Refugee Services helps refugees and immigrants resettle in the U.S. and supports#}
-            {#                    international humanitarian efforts. We offer assistance, training, resource referrals, and#}
-            {#                    connections to opportunities for self-sufficiency.#}
-            {#                </p>#}
-            {#            </div>#}
             <div class="flex flex-col shadow-lg bg-primary-100 dark:bg-dark-primary-100 rounded-lg p-4">
                 <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-300">Features</h2>
                 <p>
@@ -83,14 +74,12 @@
             </div>
         </div>
     </div>
-    <div class="container mx-auto flex justify-end px-5 py-5">
-        <div class="flex justify-center items-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <img src="{% static 'images/logos/StudioLogo.png' %}" alt="Studio 930 Logo"
-                 class="w-48 bg-neutral-50"/>
-            <img src="{% static 'images/logos/RRHLogo.png' %}" alt="Rochester Regional Health Logo"
-                 class="w-48 bg-neutral-50"/>
-        </div>
+
+    <div class="container mx-auto flex justify-start items-center px-4 py-4 space-x-4">
+        <img src="{% static 'images/logos/StudioLogo.png' %}" alt="Studio 930 Logo" class="w-48 bg-primary-50"/>
+        <img src="{% static 'images/logos/RRHLogo.png' %}" alt="Rochester Regional Health Logo" class="w-48 bg-primary-50"/>
     </div>
+
     <div class="text-center py-4 text-neutral-800 dark:text-neutral-300">
         © {% now "Y" %} Studio 930 and Rochester Regional Health. All rights reserved. Content is available under an
         open source license.

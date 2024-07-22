@@ -12,10 +12,10 @@ class ArticleDetailView(DetailView):
     context_object_name = 'article'
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation to get a context
+        # Extend context with custom data
         context = super().get_context_data(**kwargs)
 
-        # Add breadcrumbs to the context
+        # Add breadcrumb navigation
         context['breadcrumbs'] = [
             {"name": "Home", "url": reverse_lazy('home')},
             {"name": self.object.title, "url": self.object.get_absolute_url()},

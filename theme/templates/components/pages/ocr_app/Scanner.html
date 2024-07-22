@@ -5,16 +5,17 @@
 {% block content %}
     <section>
         <div class="grid grid-cols-3 gap-4 my-8 items-center justify-center p-4 w-full max-w-3xl mx-auto">
-            <div class="flex justify-center">
-                <img class="w-32 h-32" src="{% static 'images/main/bottle.png' %}" alt="bottle">
-            </div>
-            <div class="flex justify-center">
-                <img class="w-32 h-32" src="{% static 'images/main/translate.png' %}" alt="translate">
-            </div>
-            <div class="flex justify-center">
-                <img class="w-32 h-32" src="{% static 'images/main/volume.png' %}" alt="volume">
-            </div>
-        </div>
+    <div class="flex justify-center">
+        <img class="w-32 h-32 border-2 p-4 border-black rounded-lg" src="{% static 'images/main/bottle.png' %}" alt="bottle">
+    </div>
+    <div class="flex justify-center">
+        <img class="w-32 h-32 border-2 p-4 border-black rounded-lg" src="{% static 'images/main/translate.png' %}" alt="translate">
+    </div>
+    <div class="flex justify-center">
+        <img class="w-32 h-32 border-2 p-4 border-black rounded-lg" src="{% static 'images/main/volume.png' %}" alt="volume">
+    </div>
+</div>
+
         <div class="flex flex-col   ">
             <div class="flex-grow flex flex-col items-center justify-center p-4 w-full max-w-3xl mx-auto">
                 <!-- Atom: Header -->
@@ -50,7 +51,7 @@
                 <!-- Atom: Send Button -->
                 <div class="w-full mt-4">
                     <button id="send-button"
-                            class="w-full bg-secondary-400 text-neutral-700 p-2 rounded hover:bg-secondary-500">
+                            class="w-full bg-secondary-400 text-neutral-900 p-2 rounded hover:bg-secondary-500">
                         Send
                     </button>
                 </div>

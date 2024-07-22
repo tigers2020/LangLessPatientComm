@@ -1,1 +1,12 @@
-<button class="bg-primary-500 text-black p-2 rounded hover:bg-blue-700">{{ text }}</button>
+<!-- theme/templates/components/atoms/button.html -->
+{% if type == 'submit' %}
+    <button type="submit"
+            class="bg-primary-900 hover:bg-primary-600 dark:bg-neutral-600 dark:hover:bg-neutral-500 text-neutral-50 hover:text-neutral-800 dark:text-neutral-800 font-bold py-2 px-4 rounded transition duration-300">
+        {{ text }}
+    </button>
+{% else %}
+    <a href="{% url url_name %}"
+       class="bg-primary-900 hover:bg-primary-600 dark:bg-neutral-600 dark:hover:bg-neutral-500 text-neutral-50 hover:text-neutral-800 dark:text-neutral-800 font-bold py-2 px-4 rounded transition duration-300">
+        {{ text }}
+    </a>
+{% endif %}

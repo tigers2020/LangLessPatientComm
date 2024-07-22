@@ -13,9 +13,7 @@
         <p class="text-neutral-600 dark:text-neutral-400 text-center mb-4">
             Explore our educational resources and tools to improve your healthcare knowledge.
         </p>
-        <a href="{% url "scenario_list" %}"
-           class="bg-secondary-400 hover:bg-secondary-500 dark:bg-neutral-600 dark:hover:bg-neutral-500 text-neutral-700 dark:text-neutral-300 font-bold py-2 px-4 rounded transition duration-300">
-            Get Started
-        </a>
+    {% include 'components/atoms/button.html' with button_type='link' url_name='scenario_list' text='Get Started' %}
+
     </div>
 </div>

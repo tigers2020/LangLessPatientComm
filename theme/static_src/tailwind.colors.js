@@ -31,7 +31,7 @@ const colors = {
     },
     primary: {
         light: {
-            50: '#f3f9fb',
+            50: '#F8FAFB',
             100: '#e8f4f7',
             200: '#d1e9ef',
             300: '#badfe7',
@@ -40,7 +40,7 @@ const colors = {
             600: '#a9d9e5',
             700: '#91cedd',
             800: '#78c3d5',
-            900: '#5fb8cd',
+            900: '#298EA6',
         },
         dark: {
             50: '#203437',
